@@ -11,12 +11,15 @@ import Autoplay from "embla-carousel-autoplay";
 
 export function CarouselComponent() {
   const plugin = React.useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: true })
+    Autoplay({ delay: 5000, stopOnInteraction: true })
   );
 
   return (
     <Carousel
       plugins={[plugin.current]}
+      opts={{
+        loop: true,
+      }}
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
       className="w-full"
