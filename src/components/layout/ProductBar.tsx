@@ -19,7 +19,7 @@ export default function ProductBar() {
         <Button className="bg-primary-500 text-lg p-2">+</Button>
       </div>
       <Button className="bg-primary-500 text-base text-white w-full p-6">
-        Add to cart
+        Tambah ke Keranjang
       </Button>
     </div>
   );
