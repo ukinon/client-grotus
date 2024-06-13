@@ -1,6 +1,6 @@
 import CartProductCard from "@/components/product/CartProductCard";
-import TitleBar from "../../components/layout/TitleBar";
 import CheckoutBar from "@/components/layout/CheckoutBar";
+import Navbar from "@/components/layout/Navbar";
 
 const data = [
   {
@@ -26,7 +26,7 @@ const data = [
 export default function page() {
   return (
     <main className="flex h-screen flex-col items-center justify-start">
-      <TitleBar title="Cart" />
+      <Navbar withBackButton withCart={false} title="Cart" />
 
       <div className="flex flex-col gap-2 w-[95%]">
         {data.map((item, index) => (

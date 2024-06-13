@@ -7,26 +7,16 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
 
-export function CarouselComponent() {
-  const plugin = React.useRef(
-    Autoplay({ delay: 2000, stopOnInteraction: true })
-  );
-
+export function ProductCarousel() {
   return (
-    <Carousel
-      plugins={[plugin.current]}
-      onMouseEnter={plugin.current.stop}
-      onMouseLeave={plugin.current.reset}
-      className="w-full"
-    >
+    <Carousel className="w-full">
       <CarouselContent>
         {Array.from({ length: 5 }).map((_, index) => (
           <CarouselItem key={index}>
             <div className="p-1">
               <Card>
-                <CardContent className="flex aspect-video items-center justify-center p-6 bg-zinc-400 rounded-xl">
+                <CardContent className="flex aspect-square items-center justify-center p-6 bg-zinc-400 rounded-xl">
                   <span className="text-4xl font-semibold">{index + 1}</span>
                 </CardContent>
               </Card>

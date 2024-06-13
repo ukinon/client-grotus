@@ -1,9 +1,10 @@
 import { Product } from "@/types/Product";
-import { HeartIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { formatToIDR } from "@/lib/formatToIDR";
+import { RxTrash } from "react-icons/rx";
+import { FiTrash } from "react-icons/fi";
 
 type Props = {
   data: Product;
@@ -24,7 +25,7 @@ export default function CartProductCard({ data }: Props) {
           <div className="flex justify-between">
             <h1 className="font-bold text-sm line-clamp-1">{data.name}</h1>
 
-            <HeartIcon className="text-red-500" />
+            <FiTrash className="text-red-500" />
           </div>
           <p className=" font-bold text-zinc-400 text-sm">
             {formatToIDR(data.price as number)}
