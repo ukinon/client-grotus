@@ -45,7 +45,7 @@ export default function MainProductCard({ data, className }: Props) {
             className="w-1/2 h-1/6 text-[0.6rem] self-end bg-primary-600 text-white mt-2"
             onClick={(e) => e.preventDefault()}
           >
-            Add to Cart
+            <span className="text-sm mr-1">+</span> Keranjang
           </Button>
         </CardContent>
       </Link>

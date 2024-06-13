@@ -19,11 +19,12 @@ const config = {
     },
     extend: {
       colors: {
+        black: "#101720",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        foreground: "#101720",
         primary: {
           "50": "#effef3",
           "100": "#dbfde4",
