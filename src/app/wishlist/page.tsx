@@ -6,7 +6,7 @@ export default function page() {
     <main className="flex h-screen flex-col items-center justify-center">
       <Navbar />
       <div className="flex items-center justify-center">
-        <p className="font-bold">Ini profile</p>
+        <p className="font-bold">Ini wishlist</p>
       </div>
       <BottomBar />
     </main>
