@@ -38,7 +38,7 @@ export default function BottomBar() {
   };
 
   return (
-    <div className="w-screen flex flex-row px-5 pt-2 pb-9 fixed bottom-0 items-end justify-between border-t-2 border-zinc-300 bg-white">
+    <div className="w-screen flex flex-row px-5 pt-2 fixed bottom-0 items-end justify-between border-t-2 border-zinc-300 bg-white">
       <Link className="w-1/6" href="/">
         <div className="flex flex-col gap-1 justify-center items-center">
           <BiHome className="text-2xl" />
