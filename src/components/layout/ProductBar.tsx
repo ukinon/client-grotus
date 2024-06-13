@@ -8,7 +8,7 @@ import { Input } from "../ui/input";
 
 export default function ProductBar() {
   return (
-    <div className="w-screen flex flex-row p-5 pb-8 fixed bottom-0 items-center justify-between ">
+    <div className="w-screen flex flex-row p-5 pb-8 fixed bottom-0 items-center justify-between bg-white">
       <div className="flex flex-row justify-center w-1/2 items-center">
         <Button className="bg-primary-500 text-lg p-2">-</Button>
         <Input
