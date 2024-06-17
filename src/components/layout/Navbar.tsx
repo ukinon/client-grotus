@@ -32,9 +32,11 @@ export default function Navbar({
     <div className="w-screen flex flex-row p-5 h-[8dvh] fixed top-0 items-center justify-between z-50 bg-white">
       <div className="flex flex-row gap-2 items-center w-full">
         {withBackButton && (
-          <RxCaretLeft className="text-3xl" onClick={() => router.back()} />
+          <RxCaretLeft className="text-xl" onClick={() => router.back()} />
         )}
-        {isHome && <p className="font-bold mr-3">Grotus</p>}
+        {isHome && (
+          <p className="font-bold mr-3 text-xl text-primary-500">Grotus</p>
+        )}
         {title && <p className="font-bold text-xl">{title}</p>}
         {withSearchButton && (
           <Link

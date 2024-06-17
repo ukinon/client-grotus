@@ -1,7 +1,12 @@
+"use client";
+
 import BottomBar from "@/components/layout/BottomBar";
 import Navbar from "@/components/layout/Navbar";
 import TransactionProductCard from "@/components/product/TransactionProductCard";
+import { setParams } from "@/lib/setParams";
 import { Transaction } from "@/types/Transaction";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 const data: Transaction[] = [
   {
@@ -48,22 +53,62 @@ const data: Transaction[] = [
   },
 ];
 
-export default function page() {
+export default function TransactionPage() {
+  const params = useSearchParams();
+  const status = params.get("filter[status]");
+
+  useEffect(() => {
+    setParams({
+      params: "filter[status]",
+      value: "all",
+    });
+  }, []);
+
+  function setFilter(value: string) {
+    setParams({
+      params: "filter[status]",
+      value: value,
+    });
+  }
+
   return (
     <main className="flex h-screen flex-col items-center justify-start relative">
       <Navbar withSearch searchPlaceholder="Cari transaksi..." />
 
       <div className="flex flex-row gap-2 justify-center w-full fixed left-0 top-0 mt-[8dvh] py-3 bg-white">
-        <button className="bg-zinc-200 text-[0.7rem] rounded-full px-3 py-1 min-w-20">
+        <button
+          onClick={() => setFilter("all")}
+          className={`bg-zinc-200 text-[0.7rem] rounded-full px-3 py-1 min-w-20 ${
+            status == "all" && "border border-secondary-400 text-secondary-400 "
+          }`}
+        >
           Semua
         </button>
-        <button className="bg-zinc-200 text-[0.7rem] rounded-full px-3 py-1 min-w-20">
+        <button
+          onClick={() => setFilter("ongoing")}
+          className={`bg-zinc-200 text-[0.7rem] rounded-full px-3 py-1 min-w-20 ${
+            status == "ongoing" &&
+            "border border-secondary-400 text-secondary-400 "
+          }`}
+        >
           Berlangsung
         </button>
-        <button className="bg-zinc-200 text-[0.7rem] rounded-full px-3 py-1 min-w-20">
+        <button
+          onClick={() => setFilter("finished")}
+          className={`bg-zinc-200 text-[0.7rem] rounded-full px-3 py-1 min-w-20 ${
+            status == "finished" &&
+            "border border-secondary-400 text-secondary-400 "
+          }`}
+        >
           Selesai
         </button>
-        <button className="bg-zinc-200 text-[0.7rem] rounded-full px-3 py-1 min-w-20">
+        <button
+          onClick={() => setFilter("cancelled")}
+          className={`bg-zinc-200 text-[0.7rem] rounded-full px-3 py-1 min-w-20 ${
+            status == "cancelled" &&
+            "border border-secondary-400 text-secondary-400 "
+          }`}
+        >
           Batal
         </button>
       </div>

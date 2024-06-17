@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "../components/layout/Navbar";
 import BottomBar from "../components/layout/BottomBar";
 
-const poppins = Poppins({ subsets: ["latin"], weight: "400" });
+const poppins = Poppins({ subsets: ["latin"], weight: "300" });
 
 export const metadata: Metadata = {
   title: "Grotus",
