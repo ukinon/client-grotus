@@ -15,7 +15,11 @@ type Props = {
 export default function MainProductCard({ data, className }: Props) {
   return (
     <Card className={`${className} w-full`}>
-      <Link href={`/product/${data.id}`}>
+      <Link
+        href={{
+          pathname: `/product/${data.id}`,
+        }}
+      >
         <CardContent className="flex flex-col gap-2 items-start justify-center p-3 bg-white border border-zinc-300 shadow-sm rounded-xl w-full">
           <Image
             src={data.image as string}

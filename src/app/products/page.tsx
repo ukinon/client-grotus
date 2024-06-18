@@ -33,7 +33,7 @@ export default function ProductsPage() {
             <FiFilter className="text-base" />
           </button>
         </div>
-        <div className="grid grid-cols-2 flex-wrap gap-5 justify-center mt-12">
+        <div className="grid grid-cols-2 flex-wrap gap-2 justify-center mt-12">
           {productData?.data.data.map((product: Product) => (
             <MainProductCard
               data={product}
