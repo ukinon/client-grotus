@@ -3,7 +3,7 @@ import Navbar from "@/components/layout/Navbar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-export default function page() {
+export default function ProfilePage() {
   return (
     <main className="flex h-screen flex-col items-center justify-center">
       <Navbar title="Profile" />

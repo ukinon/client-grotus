@@ -12,6 +12,11 @@ const nextConfig = {
         hostname: "via.placeholder.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "encrypted-tbn0.gstatic.com",
+        port: "",
+      },
     ],
   },
 };

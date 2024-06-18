@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import React from "react";
+import LoginForm from "./LoginForm";
 
 export default function LoginPage() {
   return (
@@ -17,21 +17,10 @@ export default function LoginPage() {
           <h1 className="font-bold text-lg">Masuk ke akun mu</h1>
           <p className="text-sm">Masukkan email dan password</p>
         </div>
-        <div className="flex flex-col gap-3 items-center w-full">
-          <Input
-            placeholder="Masukkan email mu..."
-            className="border-zinc-500 placeholder:text-sm"
-          />
-          <Input
-            placeholder="Masukkan password mu..."
-            className="border-zinc-500 placeholder:text-sm"
-          />
-          <Button className="w-full bg-primary-500 text-white">Masuk</Button>
-        </div>
-
-        <div className="flex flex-row w-full gap-2 items-center">
+        <LoginForm />
+        <div className="flex flex-row justify-center w-full gap-2 items-center">
           <hr className="text-black w-1/4" />
-          <p className="text-sm w-1/2">Belum punya akun?</p>
+          <p className="text-sm w-1/2 text-center">Belum punya akun?</p>
           <hr className="text-black w-1/4" />
         </div>
         <Link className="w-full" href="/register">

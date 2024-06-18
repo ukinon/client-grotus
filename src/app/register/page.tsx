@@ -1,11 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import InputPassword from "@/components/ui/inputPassword";
 import Link from "next/link";
 import React from "react";
+import { RxEnvelopeClosed, RxLockClosed, RxPerson } from "react-icons/rx";
+import RegisterForm from "./RegisterForm";
 
 export default function RegisterPage() {
   return (
-    <div className="flex flex-col w-screen gap-20 max-h-screen items-center justify-start">
+    <div className="flex flex-col w-screen gap-8 max-h-screen items-center justify-start">
       <div className="flex flex-col items-center">
         <h1 className="text-primary-500 text-3xl font-bold">Grotus</h1>
         <p className="text-secondary-500 text-sm">
@@ -20,25 +23,11 @@ export default function RegisterPage() {
             <span className="text-primary-500">Grotus</span> !
           </p>
         </div>
-        <div className="flex flex-col gap-3 items-center w-full">
-          <Input
-            placeholder="Masukkan nama mu..."
-            className="border-zinc-500 placeholder:text-sm"
-          />
-          <Input
-            placeholder="Masukkan email mu..."
-            className="border-zinc-500 placeholder:text-sm"
-          />
-          <Input
-            placeholder="Masukkan password mu..."
-            className="border-zinc-500 placeholder:text-sm"
-          />
-          <Button className="w-full bg-primary-500 text-white">Masuk</Button>
-        </div>
+        <RegisterForm />
 
         <div className="flex flex-row w-full gap-2 items-center">
           <hr className="text-black w-1/3" />
-          <p className="text-sm w-1/3">Punya akun?</p>
+          <p className="text-sm w-1/3 text-center">Punya akun?</p>
           <hr className="text-black w-1/3" />
         </div>
         <Link className="w-full" href="/login">
