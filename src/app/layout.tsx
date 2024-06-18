@@ -22,7 +22,6 @@ export default function RootLayout({
     <Providers>
       <html lang="en">
         <body className={poppins.className}>
-          {" "}
           <Suspense fallback={<LoadingPage />}>
             <div className="mt-20 mb-36">{children}</div>
           </Suspense>

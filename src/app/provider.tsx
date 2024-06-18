@@ -6,11 +6,10 @@ import AuthProvider from "react-auth-kit/AuthProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const store = createStore({
-  authName: "__auth",
+  authName: "_auth",
   authType: "cookie",
-  cookieDomain: "127.0.0.1",
-  cookieSecure: false,
-  debug: true,
+  cookieDomain: window.location.hostname,
+  cookieSecure: window.location.protocol === "https:",
 });
 
 const queryClient = new QueryClient();

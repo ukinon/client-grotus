@@ -1,6 +1,7 @@
 import CartProductCard from "@/components/product/CartProductCard";
 import CheckoutBar from "@/components/layout/CheckoutBar";
 import Navbar from "@/components/layout/Navbar";
+import NextAuth from "@auth-kit/next/NextAuth";
 
 const data = [
   {
@@ -25,15 +26,17 @@ const data = [
 
 export default function page() {
   return (
-    <main className="flex h-screen flex-col items-center justify-start">
-      <Navbar withBackButton withCart={false} title="Cart" />
+    <NextAuth fallbackPath="/login">
+      <main className="flex h-screen flex-col items-center justify-start">
+        <Navbar withBackButton withCart={false} title="Cart" />
 
-      <div className="flex flex-col gap-2 w-[95%]">
-        {data.map((item, index) => (
-          <CartProductCard key={index} data={item} />
-        ))}
-      </div>
-      <CheckoutBar />
-    </main>
+        <div className="flex flex-col gap-2 w-[95%]">
+          {data.map((item, index) => (
+            <CartProductCard key={index} data={item} />
+          ))}
+        </div>
+        <CheckoutBar />
+      </main>
+    </NextAuth>
   );
 }

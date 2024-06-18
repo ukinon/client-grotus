@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import TransactionProductCard from "@/components/product/TransactionProductCard";
 import { setParams } from "@/lib/setParams";
 import { Transaction } from "@/types/Transaction";
+import NextAuth from "@auth-kit/next/NextAuth";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
@@ -72,52 +73,55 @@ export default function TransactionPage() {
   }
 
   return (
-    <main className="flex h-screen flex-col items-center justify-start relative">
-      <Navbar withSearch searchPlaceholder="Cari transaksi..." />
+    <NextAuth fallbackPath="/login">
+      <main className="flex h-screen flex-col items-center justify-start relative">
+        <Navbar withSearch searchPlaceholder="Cari transaksi..." />
 
-      <div className="flex flex-row gap-2 justify-center w-full fixed left-0 top-0 mt-[8dvh] py-3 bg-white">
-        <button
-          onClick={() => setFilter("all")}
-          className={`bg-zinc-200 text-[0.7rem] rounded-full px-3 py-1 min-w-20 ${
-            status == "all" && "border border-secondary-400 text-secondary-400 "
-          }`}
-        >
-          Semua
-        </button>
-        <button
-          onClick={() => setFilter("ongoing")}
-          className={`bg-zinc-200 text-[0.7rem] rounded-full px-3 py-1 min-w-20 ${
-            status == "ongoing" &&
-            "border border-secondary-400 text-secondary-400 "
-          }`}
-        >
-          Berlangsung
-        </button>
-        <button
-          onClick={() => setFilter("finished")}
-          className={`bg-zinc-200 text-[0.7rem] rounded-full px-3 py-1 min-w-20 ${
-            status == "finished" &&
-            "border border-secondary-400 text-secondary-400 "
-          }`}
-        >
-          Selesai
-        </button>
-        <button
-          onClick={() => setFilter("cancelled")}
-          className={`bg-zinc-200 text-[0.7rem] rounded-full px-3 py-1 min-w-20 ${
-            status == "cancelled" &&
-            "border border-secondary-400 text-secondary-400 "
-          }`}
-        >
-          Batal
-        </button>
-      </div>
-      <div className="flex flex-col mt-12 w-[90%] gap-2">
-        {data.map((item, index) => (
-          <TransactionProductCard data={item} key={index} />
-        ))}
-      </div>
-      <BottomBar />
-    </main>
+        <div className="flex flex-row gap-2 justify-center w-full fixed left-0 top-0 mt-[8dvh] py-3 bg-white">
+          <button
+            onClick={() => setFilter("all")}
+            className={`bg-zinc-200 text-[0.7rem] rounded-full px-3 py-1 min-w-20 ${
+              status == "all" &&
+              "border border-secondary-400 text-secondary-400 "
+            }`}
+          >
+            Semua
+          </button>
+          <button
+            onClick={() => setFilter("ongoing")}
+            className={`bg-zinc-200 text-[0.7rem] rounded-full px-3 py-1 min-w-20 ${
+              status == "ongoing" &&
+              "border border-secondary-400 text-secondary-400 "
+            }`}
+          >
+            Berlangsung
+          </button>
+          <button
+            onClick={() => setFilter("finished")}
+            className={`bg-zinc-200 text-[0.7rem] rounded-full px-3 py-1 min-w-20 ${
+              status == "finished" &&
+              "border border-secondary-400 text-secondary-400 "
+            }`}
+          >
+            Selesai
+          </button>
+          <button
+            onClick={() => setFilter("cancelled")}
+            className={`bg-zinc-200 text-[0.7rem] rounded-full px-3 py-1 min-w-20 ${
+              status == "cancelled" &&
+              "border border-secondary-400 text-secondary-400 "
+            }`}
+          >
+            Batal
+          </button>
+        </div>
+        <div className="flex flex-col mt-12 w-[90%] gap-2">
+          {data.map((item, index) => (
+            <TransactionProductCard data={item} key={index} />
+          ))}
+        </div>
+        <BottomBar />
+      </main>
+    </NextAuth>
   );
 }
