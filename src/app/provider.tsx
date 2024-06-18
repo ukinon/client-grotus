@@ -5,11 +5,13 @@ import createStore from "react-auth-kit/createStore";
 import AuthProvider from "react-auth-kit/AuthProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+const isBrowser = typeof window !== "undefined";
+
 const store = createStore({
   authName: "_auth",
   authType: "cookie",
-  cookieDomain: window.location.hostname,
-  cookieSecure: window.location.protocol === "https:",
+  cookieDomain: isBrowser ? window.location.hostname : "",
+  cookieSecure: isBrowser ? window.location.protocol === "https:" : false,
 });
 
 const queryClient = new QueryClient();
