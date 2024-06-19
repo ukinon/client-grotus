@@ -22,7 +22,7 @@ export default function MainProductCard({ data, className }: Props) {
       >
         <CardContent className="flex flex-col gap-2 items-start justify-center p-3 bg-white border border-zinc-300 shadow-sm rounded-xl w-full">
           <Image
-            src={data.image as string}
+            src={(data.image as string) || "https://via.placeholder.com/150"}
             width={150}
             height={150}
             alt="product image"
@@ -34,8 +34,8 @@ export default function MainProductCard({ data, className }: Props) {
             </h1>
             <div className="flex flex-row gap-1 items-center text-[0.6rem]">
               <StarFilledIcon className="text-yellow-400" />
-              {data.rating}
-              {`(${data.ratingCount})`}
+              {data.rating || 0}
+              {data.ratingCount ? `(${data.ratingCount})` : "(0)"}
             </div>
           </div>
           <p className="text-[0.7rem] text-zinc-400 line-clamp-1 overflow-hidden">

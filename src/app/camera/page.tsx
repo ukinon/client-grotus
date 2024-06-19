@@ -3,19 +3,29 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import Webcam from "react-webcam";
-import { BiCamera, BiPhotoAlbum, BiUpload } from "react-icons/bi";
-import { RxRotateCounterClockwise } from "react-icons/rx";
+import {
+  BiCamera,
+  BiPhotoAlbum,
+  BiRotateLeft,
+  BiSend,
+  BiUpload,
+} from "react-icons/bi";
+import { RxCaretLeft, RxRotateCounterClockwise } from "react-icons/rx";
+import Navbar from "@/components/layout/Navbar";
+import Image from "next/image";
 
 const CameraPage: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [photo, setPhoto] = useState<string | null>(null);
   const [facingMode, setFacingMode] = useState<"user" | "environment">("user");
   const [flash, setFlash] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const webcamRef = useRef<Webcam>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       setSelectedFile(event.target.files[0]);
+      setIsModalOpen(true);
     }
   };
 
@@ -24,8 +34,9 @@ const CameraPage: React.FC = () => {
       setFlash(true); // Simulate flash
       setTimeout(() => {
         setFlash(false);
-        const imageSrc = webcamRef?.current?.getScreenshot();
+        const imageSrc = webcamRef.current?.getScreenshot();
         setPhoto(imageSrc as string);
+        setIsModalOpen(true);
       }, 200);
     }
   };
@@ -60,72 +71,107 @@ const CameraPage: React.FC = () => {
       });
       console.log(response.data);
       alert("File uploaded successfully!");
+      setIsModalOpen(false);
+      setSelectedFile(null);
+      setPhoto(null);
     } catch (error) {
       console.error("Error uploading the file:", error);
       alert("Error uploading the file.");
     }
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedFile(null);
+    setPhoto(null);
+  };
+
   return (
-    <div>
+    <div className="h-[100vh] overflow-hidden relative -mt-20 -mb-36">
+      <Navbar withBackButton withCart={false} bgColor="bg-transparent" />
       {flash && <div className="flash-overlay"></div>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <Webcam
-            audio={false}
-            ref={webcamRef}
-            screenshotFormat="image/jpeg"
-            width={320}
-            height={240}
-            videoConstraints={{ facingMode }}
-            className="w-screen h-[75dvh]"
+      <div className="flex flex-col h-full">
+        <Webcam
+          audio={false}
+          ref={webcamRef}
+          screenshotFormat="image/jpeg"
+          width="100%"
+          height="auto"
+          videoConstraints={{ facingMode }}
+          className="w-full h-[100dvh] object-cover"
+        />
+        <div className="flex flex-row fixed bottom-0 w-full items-center justify-between h-[15vh] px-8 bg-transparent rounded-t-lg pb-6">
+          <input
+            className="hidden"
+            id="takePicture"
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
           />
-          <div className="flex flex-row items-center justify-between h-[17dvh] px-8 bg-primary-700 rounded-t-lg">
-            <input
-              className="hidden"
-              id="takePicture"
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-            />
-            <label htmlFor="takePicture">
-              <BiPhotoAlbum className="text-4xl text-white" />
-            </label>
-            <button
-              type="button"
-              className="bg-white p-5 rounded-full"
-              onClick={handleTakePhoto}
-            >
-              <BiCamera className="text-4xl" />
-            </button>
-            <button
-              type="button"
-              className="text-white"
-              onClick={handleRotateCamera}
-            >
-              <RxRotateCounterClockwise className="text-4xl" />
-            </button>
+          <label
+            htmlFor="takePicture"
+            className="text-black bg-white p-3 rounded-full"
+          >
+            <BiPhotoAlbum className="text-4xl " />
+          </label>
+          <button
+            type="button"
+            className="bg-primary-500 text-white p-5 rounded-full"
+            onClick={handleTakePhoto}
+          >
+            <BiCamera className="text-4xl" />
+          </button>
+          <button
+            type="button"
+            className="text-black bg-white p-3 rounded-full"
+            onClick={handleRotateCamera}
+          >
+            <BiRotateLeft className="text-4xl" />
+          </button>
+        </div>
+      </div>
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 h-screen">
+          <div className="bg-black rounded-lg max-w-md w-full text-center h-screen">
+            {selectedFile && (
+              <div>
+                <Image
+                  src={URL.createObjectURL(selectedFile)}
+                  alt="Selected"
+                  width={100}
+                  height={100}
+                  className="w-full h-[100dvh] object-cover"
+                />
+              </div>
+            )}
+            {photo && (
+              <div>
+                <Image
+                  src={photo}
+                  alt="Taken"
+                  width={100}
+                  height={100}
+                  className="w-full h-[100dvh] object-cover"
+                />
+              </div>
+            )}
+            <form onSubmit={handleSubmit} className="mt-4">
+              <div className="flex flex-row fixed bottom-0 w-full items-center justify-between h-[15vh] px-8 bg-black bg-opacity-30 rounded-t-lg pb-6 text-white">
+                <h1 className="text-xl">Kirim</h1>
+                <button
+                  type="submit"
+                  className="bg-primary-500 text-white px-4 py-3 rounded-full mr-2"
+                >
+                  <BiSend className="text-4xl" />
+                </button>
+              </div>
+
+              <RxCaretLeft
+                onClick={closeModal}
+                className="text-4xl bg-white rounded-full fixed top-5 left-5"
+              />
+            </form>
           </div>
-        </div>
-        <button type="submit">
-          <BiUpload className="text-4xl" />
-        </button>
-      </form>
-      {selectedFile && (
-        <div>
-          <h4>Selected File:</h4>
-          <p>{selectedFile.name}</p>
-          <img
-            src={URL.createObjectURL(selectedFile)}
-            alt="Selected"
-            width="200"
-          />
-        </div>
-      )}
-      {photo && (
-        <div>
-          <h4>Taken Photo:</h4>
-          <img src={photo} alt="Taken" width="200" />
         </div>
       )}
       <style jsx>{`
@@ -136,7 +182,7 @@ const CameraPage: React.FC = () => {
           width: 100%;
           height: 100%;
           background-color: white;
-          opacity: 0.8;
+          opacity: 0.5;
           z-index: 9999;
         }
       `}</style>

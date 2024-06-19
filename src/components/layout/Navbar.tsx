@@ -18,6 +18,7 @@ type Props = {
   title?: string;
   withBackButton?: boolean;
   withCart?: boolean;
+  bgColor?: string;
 };
 
 export default function Navbar({
@@ -28,6 +29,7 @@ export default function Navbar({
   withBackButton,
   withSearchButton,
   withCart = true,
+  bgColor,
 }: Props) {
   const router = useRouter();
   const isAuthenticated = useIsAuthenticated();
@@ -40,10 +42,17 @@ export default function Navbar({
   }, [isAuthenticated]);
 
   return (
-    <div className="w-screen flex flex-row p-5 h-[8dvh] fixed top-0 items-center justify-between z-50 bg-white">
+    <div
+      className={`w-screen flex flex-row p-5 h-[8dvh] fixed top-0 items-center justify-between z-50  ${
+        bgColor ? bgColor : "bg-white"
+      }`}
+    >
       <div className="flex flex-row gap-2 items-center w-full">
         {withBackButton && (
-          <RxCaretLeft className="text-4xl" onClick={() => router.back()} />
+          <RxCaretLeft
+            className="text-4xl bg-white rounded-full"
+            onClick={() => router.back()}
+          />
         )}
         {isHome && (
           <p className="font-bold mr-3 text-xl text-primary-500">Grotus</p>
