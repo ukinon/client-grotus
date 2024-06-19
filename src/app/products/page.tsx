@@ -11,7 +11,7 @@ import { FiFilter } from "react-icons/fi";
 
 export default function ProductsPage() {
   const params = useSearchParams();
-  const { productData } = useGetProducts(params.toString());
+  const { productData } = useGetProducts(`?${params.toString()}`);
 
   return (
     <main className="flex min-h-[75dvh] flex-col items-center justify-start">

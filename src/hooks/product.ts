@@ -23,7 +23,6 @@ export const useGetProducts = (query: string) => {
   };
 };
 export const useGetProduct = (id: number) => {
-  console.log(id);
   const {
     data: productData,
     isLoading: productLoading,

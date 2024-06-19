@@ -14,7 +14,7 @@ type Props = {
 };
 export default function MainProductCard({ data, className }: Props) {
   return (
-    <Card className={`${className} w-full`}>
+    <Card className={`${className} w-[175px]`}>
       <Link
         href={{
           pathname: `/product/${data.id}`,
