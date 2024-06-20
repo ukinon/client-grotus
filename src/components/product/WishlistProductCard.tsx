@@ -10,7 +10,7 @@ type Props = {
   data: Cart;
 };
 
-export default function CartProductCard({ data }: Props) {
+export default function WishlistProductCard({ data }: Props) {
   const { deleteMutation } = useDelete({
     id: data.id as number,
     path: "cart",
@@ -48,15 +48,9 @@ export default function CartProductCard({ data }: Props) {
             <p className="text-[0.7rem] text-zinc-400 line-clamp-2 overflow-hidden  h-8 ">
               {data.product.description}{" "}
             </p>
-            <div className="flex flex-row items-center">
-              <Button className="bg-primary-500 text-lg p-2">-</Button>
-              <Input
-                type="number"
-                defaultValue={data.amount as number}
-                className="w-10 h-10 text-center border-0 shadow-none"
-              />
-              <Button className="bg-primary-500 text-lg p-2">+</Button>
-            </div>
+            <Button className="bg-primary-500 text-lg p-2 text-[0.7rem]">
+              + Keranjang
+            </Button>
           </div>
         </div>
       </div>
