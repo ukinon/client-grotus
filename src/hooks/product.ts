@@ -109,6 +109,7 @@ export const useAddToWishlist = ({ id }: { id: number }) => {
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["get-wishlists"] });
+      queryClient.invalidateQueries({ queryKey: ["get-product"] });
       toast({
         title: "Yay!",
         description: "Berhasil tambah ke wishlist",

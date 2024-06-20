@@ -12,7 +12,6 @@ export default function SearchRecommendations() {
   const { productData } = useGetProducts(
     `?perPage=5&filter[search]=${params.get("search")}`
   );
-  console.log(productData);
   return (
     <div className="flex flex-col gap-5 w-full">
       {productData?.data?.data.map((product: Product, index: number) => (

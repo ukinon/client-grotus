@@ -8,4 +8,5 @@ export type Product = {
   rating?: number;
   ratingCount?: number;
   amount?: number;
+  loved?: boolean;
 };

@@ -3,7 +3,7 @@ import { ProductCarousel } from "@/components/product/ProductCarousel";
 import ProductBar from "@/components/layout/ProductBar";
 import { formatToIDR } from "@/lib/formatToIDR";
 import Navbar from "@/components/layout/Navbar";
-import { RxHeart, RxStarFilled } from "react-icons/rx";
+import { RxHeart, RxHeartFilled, RxStarFilled } from "react-icons/rx";
 import {
   Drawer,
   DrawerContent,
@@ -19,6 +19,7 @@ import {
 } from "@/hooks/product";
 import { useParams } from "next/navigation";
 import LoadingPage from "@/components/ui/LoadingPage";
+import { useDelete } from "@/hooks/delete";
 
 export default function ProductPage() {
   const params = useParams();
@@ -29,6 +30,15 @@ export default function ProductPage() {
   const { addToWishlistMutation } = useAddToWishlist({
     id: data?.data.id,
   });
+  const { deleteMutation } = useDelete({
+    id: data?.data.id as number,
+    path: "wishlist",
+    queryKey: "get-wishlists",
+  });
+
+  const handleDelete = async () => {
+    await deleteMutation();
+  };
 
   const handleAddToWishlist = async () => {
     await addToWishlistMutation();
@@ -52,11 +62,17 @@ export default function ProductPage() {
                   <RxStarFilled className="text-yellow-500 text-lg" />
                   <p>{data?.data.rating || 0}</p>
                 </div>
-
-                <RxHeart
-                  onClick={() => handleAddToWishlist()}
-                  className="text-red-500 text-lg"
-                />
+                {data?.data.saved ? (
+                  <RxHeartFilled
+                    onClick={() => handleDelete()}
+                    className="text-red-500 text-lg"
+                  />
+                ) : (
+                  <RxHeart
+                    onClick={() => handleAddToWishlist()}
+                    className="text-red-500 text-lg"
+                  />
+                )}
               </div>
             </div>
 
