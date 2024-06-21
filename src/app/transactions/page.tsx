@@ -15,7 +15,7 @@ export default function TransactionPage() {
           defaultValue="unpaid"
           className="w-screen flex flex-col items-end"
         >
-          <TabsList>
+          <TabsList className="bg-white">
             <TabsTrigger value="unpaid">Belum bayar</TabsTrigger>
             <TabsTrigger value="paid">Sudah bayar</TabsTrigger>
           </TabsList>
