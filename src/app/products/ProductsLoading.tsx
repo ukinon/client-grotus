@@ -8,7 +8,7 @@ export default function ProductsLoading() {
         {Array(10)
           .fill(null)
           .map((index: number) => (
-            <Skeleton className="w-[170px] h-[270px] bg-zinc-300" key={index} />
+            <Skeleton className="w-[180px] h-[270px] bg-zinc-300" key={index} />
           ))}
       </div>
     </>
