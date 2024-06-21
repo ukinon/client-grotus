@@ -84,7 +84,6 @@ export default function ProductPage() {
                     className=" text-white bg-secondary-400 rounded-full w-fit px-2 py-1 text-xs"
                   >
                     {item.name}
-                    {index}
                   </p>
                 )
               )}
