@@ -18,11 +18,11 @@ export default function ProductBar({ id }: { id: number }) {
   };
 
   return (
-    <div className="w-screen h-[11dvh] flex flex-row p-5 pb-8 fixed bottom-0 items-center justify-between bg-white">
-      <div className="flex flex-row justify-center w-1/2 items-center">
+    <div className="w-screen h-[8dvh] flex flex-row gap-3 p-3 py-0 fixed bottom-0 items-center justify-between bg-white">
+      <div className="flex flex-row justify-center w-1/2 items-center border-primary-500 border rounded-full">
         <Button
           onClick={() => setAmount(amount - 1)}
-          className="bg-primary-500 text-lg p-2"
+          className="text-lg shadow-none"
         >
           -
         </Button>
@@ -34,14 +34,14 @@ export default function ProductBar({ id }: { id: number }) {
         />
         <Button
           onClick={() => setAmount(amount + 1)}
-          className="bg-primary-500 text-lg p-2"
+          className=" text-lg shadow-none"
         >
           +
         </Button>
       </div>
       <Button
         onClick={() => handleAddToCart()}
-        className="bg-primary-500 text-base text-white w-full p-6"
+        className="bg-primary-500 text-base text-white w-full p-6 rounded-full"
       >
         Tambah ke Keranjang
       </Button>

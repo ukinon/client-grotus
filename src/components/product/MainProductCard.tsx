@@ -45,17 +45,25 @@ export default function MainProductCard({ data, className }: Props) {
           <p className="text-[0.7rem] text-zinc-400 line-clamp-1 overflow-hidden">
             {data.description}
           </p>
-          <div className="flex justify-between items-start w-full gap-5">
-            <div className="flex flex-col gap-2">
+          <div className="flex justify-between items-start w-full gap-1">
+            <div className="flex flex-col gap-2 w-full">
               <p className=" font-bold text-black text-sm">
                 {formatToIDR(data.price || 0)}
               </p>
-              <p className=" text-[0.6rem] text-white bg-secondary-400 rounded-full w-fit px-2">
-                {data.nutrition_types &&
-                  data.nutrition_types[0].name +
-                    " + " +
-                    (data.nutrition_types.length - 1)}
-              </p>
+              <div className="flex flex-row gap-0.5">
+                <p className=" text-[0.6rem] text-white bg-secondary-400 rounded-full w-fit px-2 max-w-[65%] line-clamp-1">
+                  {data.nutrition_types &&
+                    data.nutrition_types.length > 0 &&
+                    data.nutrition_types[0].name}
+                </p>
+
+                {data.nutrition_types && data.nutrition_types.length > 1 && (
+                  <p className=" text-[0.6rem] text-white bg-secondary-400 rounded-full w-fit px-1.5">
+                    {" "}
+                    + {data.nutrition_types.length - 1}
+                  </p>
+                )}
+              </div>
             </div>
 
             <AddToCartButton id={data.id as number} size="sm" />

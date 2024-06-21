@@ -48,14 +48,14 @@ export default function CartProductCard({ data }: Props) {
             <p className="text-[0.7rem] text-zinc-400 line-clamp-2 overflow-hidden  h-8 w-1/2">
               {data.product.description}{" "}
             </p>
-            <div className="flex flex-row items-center">
-              <Button className="bg-primary-500 text-lg p-2">-</Button>
+            <div className="flex flex-row justify-center w-1/3 px-2 items-center border-primary-500 border rounded-full">
+              <button className="text-lg p-1">-</button>
               <Input
                 type="number"
                 defaultValue={data.amount as number}
-                className="w-10 h-10 text-center border-0 shadow-none"
+                className="w-10 h-5 text-center border-0 shadow-none text-[0.7rem] "
               />
-              <Button className="bg-primary-500 text-lg p-2">+</Button>
+              <button className="text-lg p-1">+</button>
             </div>
           </div>
         </div>

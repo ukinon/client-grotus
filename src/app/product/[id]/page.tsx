@@ -43,6 +43,7 @@ export default function ProductPage() {
   const handleAddToWishlist = async () => {
     await addToWishlistMutation();
   };
+
   return (
     <main className="flex min-h-[80dvh]  flex-col items-center justify-start overflow-x-hidden">
       <Navbar withBackButton withCart title="Produk" />
@@ -52,37 +53,38 @@ export default function ProductPage() {
         <>
           <div className="flex flex-col gap-4 w-[90%] ">
             <ProductCarousel />
-            <div className="flex flex-col gap-1 border-b-2 pb-3">
+            <div className="flex flex-col gap-2 border-b-2 pb-3">
               <h1 className="text-2xl font-bold mt-4">{data?.data.name}</h1>
               <p className="text-lg font-semibold">
                 {formatToIDR(data?.data.price as number)}
               </p>
               <div className="flex flex-row items-center justify-between">
                 <div className="flex flex-row items-center gap-2">
-                  <RxStarFilled className="text-yellow-500 text-lg" />
+                  <RxStarFilled className="text-yellow-500 text-2xl" />
                   <p>{data?.data.rating || 0}</p>
                 </div>
                 {data?.data.saved ? (
                   <RxHeartFilled
                     onClick={() => handleDelete()}
-                    className="text-red-500 text-lg"
+                    className="text-red-500 text-2xl"
                   />
                 ) : (
                   <RxHeart
                     onClick={() => handleAddToWishlist()}
-                    className="text-red-500 text-lg"
+                    className="text-red-500 text-2xl"
                   />
                 )}
               </div>
             </div>
-            <div className="flex flex-row gap-2 border-b-2 items-center pb-3">
+            <div className="flex flex-row gap-2 border-b-2 items-center pb-4">
               {data.data.nutrition_types?.map(
                 (item: NutritionType, index: number) => (
                   <p
                     key={index}
-                    className="text-sm text-white bg-secondary-400 rounded-full w-fit px-2 py-1"
+                    className=" text-white bg-secondary-400 rounded-full w-fit px-2 py-1 text-xs"
                   >
                     {item.name}
+                    {index}
                   </p>
                 )
               )}
@@ -106,18 +108,18 @@ export default function ProductPage() {
               </DrawerContent>
             </Drawer>
 
-            <div className="flex flex-col gap-8 items-center">
+            <div className="flex flex-col gap-8 items-center w-full">
               <h1 className="text-2xl font-bold mt-4 self-start">
                 Produk Lainnya
               </h1>
-              <div className="flex overflow-x-auto w-full">
-                <div className="grid grid-cols-2 flex-wrap gap-2 justify-center">
+              <div className="flex overflow-x-hidden justify-center w-screen">
+                <div className="grid grid-cols-2 gap-2">
                   {productData?.data.data.map(
                     (item: Product, index: number) => (
                       <MainProductCard
                         key={index}
                         data={item}
-                        className="min-w-[150px] col-span-1"
+                        className="min-w-[170px] col-span-1"
                       />
                     )
                   )}
