@@ -10,7 +10,7 @@ export default function ProfilePage() {
   const isAuthenticated = useIsAuthenticated();
   return (
     <main className="flex min-h-[75dvh] flex-col items-center justify-center">
-      <Navbar title="Profile" />
+      <Navbar title="Profil" />
       {!isAuthenticated && (
         <div className="flex items-center justify-center">
           <Link href={"/login"}>

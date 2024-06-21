@@ -6,7 +6,7 @@ import WishlistItems from "./WishlistItems";
 export default function page() {
   return (
     <NextAuth fallbackPath="/login">
-      <main className="flex h-screen flex-col items-center justify-start">
+      <main className="flex flex-col items-center justify-start">
         <Navbar title="Wishlist" />
         <WishlistItems />
         <BottomBar />

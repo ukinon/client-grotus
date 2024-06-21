@@ -23,7 +23,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={poppins.className}>
           <Suspense fallback={<LoadingPage />}>
-            <div className="mt-20 mb-36">{children}</div>
+            <div className="mt-[8dvh] mb-[11dvh]">{children}</div>
           </Suspense>
           <Toaster />
         </body>

@@ -5,6 +5,7 @@ import { formatToIDR } from "@/lib/formatToIDR";
 import { FiTrash } from "react-icons/fi";
 import { Cart } from "@/types/Cart";
 import { useDelete } from "@/hooks/delete";
+import { useRouter } from "next/navigation";
 
 type Props = {
   data: Cart;
@@ -13,9 +14,10 @@ type Props = {
 export default function WishlistProductCard({ data }: Props) {
   const { deleteMutation } = useDelete({
     id: data.id as number,
-    path: "cart",
-    queryKey: "get-carts",
+    path: "wishlist",
+    queryKey: "get-wishlists",
   });
+  const router = useRouter();
 
   const handleDelete = async () => {
     await deleteMutation();
@@ -28,6 +30,7 @@ export default function WishlistProductCard({ data }: Props) {
           src={
             (data.product.image as string) || "https://via.placeholder.com/150"
           }
+          onClick={() => router.push(`/product/${data.product.id}`)}
           width={150}
           height={150}
           alt="product image"
@@ -45,7 +48,7 @@ export default function WishlistProductCard({ data }: Props) {
             {formatToIDR(data.product.price as number)}
           </p>
           <div className="flex justify-between">
-            <p className="text-[0.7rem] text-zinc-400 line-clamp-2 overflow-hidden  h-8 ">
+            <p className="text-[0.7rem] text-zinc-400 line-clamp-2 overflow-hidden  h-8 w-1/2">
               {data.product.description}{" "}
             </p>
             <Button className="bg-primary-500 text-lg p-2 text-[0.7rem]">

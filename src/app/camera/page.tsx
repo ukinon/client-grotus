@@ -87,7 +87,7 @@ const CameraPage: React.FC = () => {
   };
 
   return (
-    <div className="h-[100vh] overflow-hidden relative -mt-20 -mb-36">
+    <div className="h-[100dvh] overflow-hidden relative -mt-[8dvh]">
       <Navbar withBackButton withCart={false} bgColor="bg-transparent" />
       {flash && <div className="flash-overlay"></div>}
       <div className="flex flex-col h-full">
@@ -97,6 +97,7 @@ const CameraPage: React.FC = () => {
           screenshotFormat="image/jpeg"
           width="100%"
           height="auto"
+          mirrored
           videoConstraints={{ facingMode }}
           className="w-full h-[100dvh] object-cover"
         />

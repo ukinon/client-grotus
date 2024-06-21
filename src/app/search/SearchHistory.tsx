@@ -20,7 +20,7 @@ export default function SearchHistory() {
     <div className="flex flex-col gap-5 w-full">
       {history.map((data: string, index: number) => (
         <div
-          className="flex flex-row justify-between items-center text-lg px-6"
+          className="flex flex-row justify-between items-center text-lg px-7"
           key={index}
         >
           <div

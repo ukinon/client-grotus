@@ -43,27 +43,31 @@ export default function Page() {
     };
   }, [updateSearchQuery]);
 
+  console.log(params.get("search"));
+
   return (
     <div className="flex flex-col">
-      <div className="flex flex-row items-center justify-between gap-2 fixed top-0 p-5 w-full">
-        <RxCaretLeft className="text-4xl" onClick={() => router.back()} />
-        <Input
-          ref={inputRef}
-          placeholder="Cari Barang..."
-          onChange={(e) => updateSearchQuery(e.currentTarget.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              const query = e.currentTarget.value;
-              updateSearchHistory(query);
-              router.push(`/products?filter[search]=${query}`);
-            }
-          }}
-          className="w-full border border-zinc-400 rounded-full"
-          autoFocus
-        />
+      <div className="w-screen flex flex-row p-5 h-[8dvh] fixed top-0 items-center justify-between z-50">
+        <div className="flex flex-row gap-2 items-center w-full">
+          <RxCaretLeft className="text-4xl" onClick={() => router.back()} />
+          <Input
+            ref={inputRef}
+            placeholder="Cari Barang..."
+            onChange={(e) => updateSearchQuery(e.currentTarget.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                const query = e.currentTarget.value;
+                updateSearchHistory(query);
+                router.push(`/products?filter[search]=${query}`);
+              }
+            }}
+            className="w-full  border border-zinc-400 rounded-full text-xs placeholder:text-xs"
+            autoFocus
+          />
+        </div>
         <div
-          className={`p-2 rounded-full border border-zinc-400 cursor-pointer ${
-            isListening ? "bg-green-500" : ""
+          className={`ml-3 border border-zinc-400 p-2 rounded-full ${
+            isListening ? "text-red-500 bg-primary-300" : "bg-white"
           }`}
           onClick={toggleListening}
         >
@@ -71,8 +75,10 @@ export default function Page() {
         </div>
       </div>
       <div className="flex flex-col gap-5">
-        {!params.get("search") && <SearchHistory />}
-        <SearchRecommendations />
+        {(!params.get("search") || params.get("search") == "") && (
+          <SearchHistory />
+        )}
+        {params.get("search") != "" && <SearchRecommendations />}
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ export default function ProductBar({ id }: { id: number }) {
   };
 
   return (
-    <div className="w-screen flex flex-row p-5 pb-8 fixed bottom-0 items-center justify-between bg-white">
+    <div className="w-screen h-[11dvh] flex flex-row p-5 pb-8 fixed bottom-0 items-center justify-between bg-white">
       <div className="flex flex-row justify-center w-1/2 items-center">
         <Button
           onClick={() => setAmount(amount - 1)}
