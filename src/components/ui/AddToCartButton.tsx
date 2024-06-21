@@ -24,7 +24,7 @@ export default function AddToCartButton({
 
   return (
     <Button
-      className={` flex justify-center w-fit px-2 py-1 self-end `}
+      className={` flex justify-center w-fit px-2 py-1 self-end shadow-none p-0`}
       onClick={(e) => handleAddToCart(e)}
       size={size}
     >
