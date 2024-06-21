@@ -11,7 +11,7 @@ export default function PaidTransactions() {
   return (
     <>
       {transactionLoading && (
-        <div className="flex flex-col mt-3 w-full items-center gap-2">
+        <div className="flex flex-col mt-12 w-full items-center gap-2">
           <WishlistLoading />
         </div>
       )}
@@ -23,7 +23,7 @@ export default function PaidTransactions() {
             </div>
           )}
           {transactionData.data.data.length > 0 && (
-            <div className="flex flex-col mt-3 w-full items-center gap-2">
+            <div className="flex flex-col mt-12 w-full items-center gap-2">
               <p>Sudah bayar</p>
             </div>
           )}

@@ -11,12 +11,12 @@ export default function UnpaidTransactions() {
   console.log(transactionData);
   return (
     <>
-      {transactionLoading && (
-        <div className="flex flex-col mt-3 w-full items-center gap-2">
+      {!transactionLoading && (
+        <div className="flex flex-col mt-12 w-full items-center gap-2">
           <WishlistLoading />
         </div>
       )}
-      {transactionData && (
+      {!transactionData && (
         <>
           {transactionData.data.data.length <= 0 && (
             <div className="flex justify-center items-center h-[78dvh] w-screen">
@@ -24,7 +24,7 @@ export default function UnpaidTransactions() {
             </div>
           )}
           {transactionData.data.data.length > 0 && (
-            <div className="flex flex-col mt-3 w-full items-center gap-2">
+            <div className="flex flex-col mt-12 w-full items-center gap-2">
               <p>Belum bayar</p>
             </div>
           )}
