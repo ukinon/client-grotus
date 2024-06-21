@@ -6,6 +6,8 @@ import { FiTrash } from "react-icons/fi";
 import { Cart } from "@/types/Cart";
 import { useDelete } from "@/hooks/delete";
 import { useRouter } from "next/navigation";
+import { BiCartAdd } from "react-icons/bi";
+import AddToCartButton from "../ui/AddToCartButton";
 
 type Props = {
   data: Cart;
@@ -51,9 +53,7 @@ export default function WishlistProductCard({ data }: Props) {
             <p className="text-[0.7rem] text-zinc-400 line-clamp-2 overflow-hidden  h-8 w-1/2">
               {data.product.description}{" "}
             </p>
-            <Button className="bg-primary-500 text-lg p-2 text-[0.7rem]">
-              + Keranjang
-            </Button>
+            <AddToCartButton id={data.product.id as number} size="lg" />
           </div>
         </div>
       </div>

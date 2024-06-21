@@ -11,7 +11,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import MainProductCard from "@/components/product/MainProductCard";
-import { Product } from "@/types/Product";
+import { NutritionType, Product } from "@/types/Product";
 import {
   useAddToWishlist,
   useGetProduct,
@@ -74,6 +74,18 @@ export default function ProductPage() {
                   />
                 )}
               </div>
+            </div>
+            <div className="flex flex-row gap-2 border-b-2 items-center pb-3">
+              {data.data.nutrition_types?.map(
+                (item: NutritionType, index: number) => (
+                  <p
+                    key={index}
+                    className="text-sm text-white bg-secondary-400 rounded-full w-fit px-2 py-1"
+                  >
+                    {item.name}
+                  </p>
+                )
+              )}
             </div>
 
             <p className="text-sm text-gray-500 line-clamp-3">

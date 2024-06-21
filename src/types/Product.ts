@@ -9,4 +9,10 @@ export type Product = {
   ratingCount?: number;
   amount?: number;
   loved?: boolean;
+  nutrition_types?: NutritionType[];
+};
+
+export type NutritionType = {
+  id?: number;
+  name?: string;
 };

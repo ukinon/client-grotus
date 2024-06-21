@@ -5,14 +5,18 @@ import { Card, CardContent } from "@/components/ui/card";
 import { formatToIDR } from "@/lib/formatToIDR";
 import { Product } from "@/types/Product";
 import { StarFilledIcon } from "@radix-ui/react-icons";
+import { count } from "console";
 import Image from "next/image";
 import Link from "next/link";
+import { BiCartAdd } from "react-icons/bi";
+import AddToCartButton from "../ui/AddToCartButton";
 
 type Props = {
   data: Product;
   className?: string;
 };
 export default function MainProductCard({ data, className }: Props) {
+  console.log(data);
   return (
     <Card className={`${className} w-[180px]`}>
       <Link
@@ -41,16 +45,21 @@ export default function MainProductCard({ data, className }: Props) {
           <p className="text-[0.7rem] text-zinc-400 line-clamp-1 overflow-hidden">
             {data.description}
           </p>
-          <p className=" font-bold text-black text-sm">
-            {formatToIDR(data.price || 0)}
-          </p>
+          <div className="flex justify-between items-start w-full gap-5">
+            <div className="flex flex-col gap-2">
+              <p className=" font-bold text-black text-sm">
+                {formatToIDR(data.price || 0)}
+              </p>
+              <p className=" text-[0.6rem] text-white bg-secondary-400 rounded-full w-fit px-2">
+                {data.nutrition_types &&
+                  data.nutrition_types[0].name +
+                    " + " +
+                    (data.nutrition_types.length - 1)}
+              </p>
+            </div>
 
-          <Button
-            className="w-1/2 h-1/6 text-[0.6rem] self-end bg-primary-600 text-white mt-2"
-            onClick={(e) => e.preventDefault()}
-          >
-            <span className="text-sm mr-1">+</span> Keranjang
-          </Button>
+            <AddToCartButton id={data.id as number} size="sm" />
+          </div>
         </CardContent>
       </Link>
     </Card>

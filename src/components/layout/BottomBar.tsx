@@ -10,7 +10,7 @@ export default function BottomBar() {
   const isActive = (pathname: string) => route === pathname;
 
   return (
-    <div className="w-screen h-[11dvh] flex flex-row px-5 pt-2 pb-7 fixed bottom-0 items-end justify-between border-t-2 border-zinc-300 bg-white">
+    <div className="w-screen min-h-[11dvh] flex flex-row px-5 pt-2 pb-7 fixed bottom-0 items-end justify-between border-t-2 border-zinc-300 bg-white">
       <Link className="w-1/6" href="/">
         <div
           className={`flex flex-col gap-1 justify-center items-center ${
@@ -32,8 +32,8 @@ export default function BottomBar() {
         </div>
       </Link>
       <Link className="w-1/6" href="/camera">
-        <div className="flex flex-col gap-1 justify-center items-center rounded-full bg-primary-700 p-4">
-          <BiScan className="text-3xl text-white" />
+        <div className="flex flex-col gap-1 justify-center items-center">
+          <BiScan className="text-6xl text-white bg-primary-700 rounded-full p-3" />
         </div>
       </Link>
       <Link className="w-1/6" href="/transactions">

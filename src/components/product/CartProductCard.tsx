@@ -45,7 +45,7 @@ export default function CartProductCard({ data }: Props) {
             {formatToIDR(data.product.price as number)}
           </p>
           <div className="flex justify-between">
-            <p className="text-[0.7rem] text-zinc-400 line-clamp-2 overflow-hidden  h-8 ">
+            <p className="text-[0.7rem] text-zinc-400 line-clamp-2 overflow-hidden  h-8 w-1/2">
               {data.product.description}{" "}
             </p>
             <div className="flex flex-row items-center">
