@@ -16,8 +16,12 @@ export default function TransactionPage() {
           className="w-screen flex flex-col items-end"
         >
           <TabsList className="bg-white fixed top-[0] mt-[8dvh] w-screen">
-            <TabsTrigger value="unpaid">Belum bayar</TabsTrigger>
-            <TabsTrigger value="paid">Sudah bayar</TabsTrigger>
+            <TabsTrigger value="unpaid" className="w-1/2">
+              Belum bayar
+            </TabsTrigger>
+            <TabsTrigger value="paid" className="w-1/2">
+              Sudah bayar
+            </TabsTrigger>
           </TabsList>
           <TabsContent value="unpaid" className="w-screen">
             <UnpaidTransactions />
