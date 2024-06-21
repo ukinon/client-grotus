@@ -5,13 +5,16 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import useIsAuthenticated from "react-auth-kit/hooks/useIsAuthenticated";
 import ProfileForm from "./ProfileForm";
+import { useGetCurrentUser } from "@/hooks/auth";
+import LoadingPage from "@/components/ui/LoadingPage";
 
 export default function ProfilePage() {
-  const isAuthenticated = useIsAuthenticated();
+  const { userData, userLoading } = useGetCurrentUser();
   return (
     <main className="flex min-h-[75dvh] flex-col items-center justify-center">
+      {userLoading && <LoadingPage />}
       <Navbar title="Profil" />
-      {!isAuthenticated && (
+      {!userData && (
         <div className="flex items-center justify-center">
           <Link href={"/login"}>
             <Button className="bg-primary-500 text-white w-[30vw]">
@@ -21,7 +24,7 @@ export default function ProfilePage() {
         </div>
       )}
 
-      {isAuthenticated && <ProfileForm />}
+      {userData && <ProfileForm data={userData.data} />}
 
       <BottomBar />
     </main>
