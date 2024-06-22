@@ -111,14 +111,14 @@ export default function ProductPage() {
               <h1 className="text-2xl font-bold mt-4 self-start">
                 Produk Lainnya
               </h1>
-              <div className="flex overflow-x-hidden justify-center w-screen">
+              <div className="flex overflow-x-hidden justify-center w-full">
                 <div className="grid grid-cols-2 gap-2">
                   {productData?.data.data.map(
                     (item: Product, index: number) => (
                       <MainProductCard
                         key={index}
                         data={item}
-                        className="min-w-[170px] col-span-1"
+                        className="col-span-1"
                       />
                     )
                   )}

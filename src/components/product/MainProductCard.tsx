@@ -18,7 +18,7 @@ type Props = {
 export default function MainProductCard({ data, className }: Props) {
   console.log(data);
   return (
-    <Card className={`${className} w-[180px]`}>
+    <Card className={`${className} min-w-[150px]`}>
       <Link
         href={{
           pathname: `/product/${data.id}`,
