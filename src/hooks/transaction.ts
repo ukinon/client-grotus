@@ -58,6 +58,8 @@ export const useAddTransaction = () => {
     mutationFn: async (data: any) => await addTransactions(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["get-transactions"] });
+      queryClient.invalidateQueries({ queryKey: ["get-carts"] });
+
       toast({
         title: "Yay!",
         description: "Berhasil menambahkan transaksi",
