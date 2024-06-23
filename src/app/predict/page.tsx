@@ -78,13 +78,9 @@ const PredictPage: React.FC = () => {
     }
 
     try {
-      const r = mutate(formData);
-      console.log(r);
-
-      alert("File uploaded successfully!");
+      mutate(formData);
     } catch (error) {
       console.error("Error uploading the file:", error);
-      alert("Error uploading the file.");
     }
   };
 
@@ -186,14 +182,7 @@ const PredictPage: React.FC = () => {
               </div>
             </div>
           )}
-          {data && (
-            <PredictionPage
-              data={data}
-              photo={
-                URL.createObjectURL(selectedFile as File) || (photo as string)
-              }
-            />
-          )}
+
           <style jsx>{`
             .flash-overlay {
               position: absolute;
@@ -207,6 +196,16 @@ const PredictPage: React.FC = () => {
             }
           `}</style>
         </>
+      )}
+      {data && (
+        <PredictionPage
+          data={data.prediction}
+          photo={
+            selectedFile
+              ? URL.createObjectURL(selectedFile as File)
+              : (photo as string)
+          }
+        />
       )}
     </div>
   );
