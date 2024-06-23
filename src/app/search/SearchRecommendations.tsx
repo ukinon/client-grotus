@@ -30,7 +30,7 @@ export default function SearchRecommendations() {
               updateSearchHistory(product.name as string);
             }}
           >
-            <div className="flex flex-row gap-5 text-base items-center">
+            <div className="flex flex-row gap-5 text-base items-center text-sm">
               <BiSearch />
               <p>{product.name}</p>
             </div>
