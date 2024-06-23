@@ -61,7 +61,7 @@ export default function Page() {
                 router.push(`/products?filter[search]=${query}`);
               }
             }}
-            className="w-full  border border-zinc-400 rounded-full text-xs placeholder:text-xs"
+            className="w-full  border border-zinc-400 rounded-full text-sm placeholder:text-sm"
             autoFocus
           />
         </div>
@@ -74,7 +74,7 @@ export default function Page() {
           <BiMicrophone className="text-lg" />
         </div>
       </div>
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-5 text-xs">
         {(!params.get("search") || params.get("search") == "") && (
           <SearchHistory />
         )}

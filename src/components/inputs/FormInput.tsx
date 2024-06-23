@@ -110,6 +110,7 @@ export default function FormInput<TFormValues extends FieldValues>({
                           field.onChange(val);
                         }}
                         initialFocus
+                        isMonth={false}
                         disabled={(date) => {
                           if (min && max) {
                             return date < (min as Date) || date > (max as Date);

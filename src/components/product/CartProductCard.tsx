@@ -26,7 +26,7 @@ export default function CartProductCard({ data }: Props) {
       <div className="flex flex-row gap-3 w-full">
         <Image
           src={
-            (data.product.image as string) || "https://via.placeholder.com/150"
+            (data.product.photo as string) || "https://via.placeholder.com/150"
           }
           width={150}
           height={150}

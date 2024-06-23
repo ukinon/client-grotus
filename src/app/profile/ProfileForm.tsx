@@ -4,12 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useGetCurrentUser, useRegister } from "@/hooks/auth";
+import { useUpdateProfile } from "@/hooks/user";
 import { FileUpload } from "@/types/FileUpload";
 import { UserData } from "@/types/UserData";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FiPhone } from "react-icons/fi";
 import {
   RxCalendar,
   RxEnvelopeClosed,
@@ -22,10 +24,9 @@ import { z } from "zod";
 const profileFormSchema = z.object({
   name: z.string().min(3),
   email: z.string().email(),
-  password: z.string().min(8),
-  confirm_password: z.string().min(8),
   address: z.string(),
   birth_date: z.string(),
+  phone: z.string(),
   preferred_payment: z.string().optional(),
 });
 
@@ -38,17 +39,21 @@ export default function ProfileForm({ data }: { data: UserData }) {
       name: data.profile?.name,
       address: data.profile?.address,
       birth_date: data.profile?.birth_date,
+      phone: data.profile?.phone,
     },
   });
-  const { registerMutation, registerPending } = useRegister();
+  const { updateProfileMutation, updateProfilePending } = useUpdateProfile();
   const [currentImage, setCurrentImage] = useState<FileUpload>({
     profile_photo: null,
   });
-  const handleRegister = (data: z.infer<typeof profileFormSchema>) => {
-    console.log(data);
-    registerMutation({
-      profile_photo: currentImage.profile_photo as File,
-      ...data,
+  const handleRegister = (value: z.infer<typeof profileFormSchema>) => {
+    console.log(value);
+    updateProfileMutation({
+      id: data?.id as number,
+      data: {
+        profile_photo: currentImage.profile_photo as File,
+        ...value,
+      },
     });
   };
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,6 +63,18 @@ export default function ProfileForm({ data }: { data: UserData }) {
       });
     }
   };
+  const currentVal = form.watch();
+
+  const hasFormChanged = () => {
+    return (
+      currentVal.name !== data.profile?.name ||
+      currentVal.address !== data.profile?.address ||
+      currentVal.birth_date !== data.profile?.birth_date ||
+      currentImage.profile_photo !== null ||
+      currentVal.phone !== data.profile?.phone
+    );
+  };
+
   return (
     <>
       {data && (
@@ -97,39 +114,38 @@ export default function ProfileForm({ data }: { data: UserData }) {
             <FormInput
               form={form}
               icon={<RxPerson />}
-              placeholder="Masukkan nama mu..."
+              placeholder="Masukkan namamu..."
               name="name"
             />
             <FormInput
               form={form}
               icon={<RxHome />}
-              placeholder="Masukkan alamat mu..."
+              placeholder="Masukkan alamatmu..."
               name="address"
+            />
+            <FormInput
+              form={form}
+              icon={<FiPhone />}
+              placeholder="Masukkan nomor teleponmu..."
+              name="phone"
             />
             <FormInput
               form={form}
               type="date"
               icon={<RxCalendar />}
-              placeholder="Pilih tanggal lahir mu..."
+              placeholder="Pilih tanggal lahirmu..."
               name="birth_date"
             />
             <FormInput
               form={form}
               type="email"
               icon={<RxEnvelopeClosed />}
-              placeholder="Masukkan email mu..."
+              placeholder="Masukkan emailmu..."
               name="email"
             />
-            <FormInput
-              form={form}
-              type="password"
-              icon={<RxLockClosed />}
-              placeholder="Masukkan password mu..."
-              name="password"
-            />{" "}
             <Button
               className="w-full bg-primary-500 text-white"
-              disabled={registerPending}
+              disabled={updateProfilePending || !hasFormChanged()}
             >
               Simpan
             </Button>

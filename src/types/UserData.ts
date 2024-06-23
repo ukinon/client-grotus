@@ -1,8 +1,8 @@
 export type UserData = {
+  id?: number;
   email?: string;
   password?: string;
   profile?: Profile;
-  profile_photo?: string | File;
 };
 
 export type Profile = {
@@ -10,4 +10,6 @@ export type Profile = {
   address?: string;
   birth_date?: string;
   preferred_payment?: string;
+  phone?: string;
+  profile_photo?: string | File;
 };

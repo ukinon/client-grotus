@@ -3,6 +3,7 @@
 import { formatToIDR } from "@/lib/formatToIDR";
 import { Button } from "../ui/button";
 import { Skeleton } from "../ui/skeleton";
+import Link from "next/link";
 
 export default function CheckoutBar({
   total,
@@ -31,7 +32,7 @@ export default function CheckoutBar({
       {loading && <Skeleton className="w-32 h-10 bg-zinc-300 py-5" />}
       {!loading && (
         <Button className="bg-primary-500 text-base py-5 text-white">
-          Checkout
+          <Link href="/checkout">Checkout</Link>
         </Button>
       )}
     </div>

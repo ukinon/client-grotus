@@ -24,7 +24,7 @@ export default function SearchHistory() {
           key={index}
         >
           <div
-            className="flex flex-row gap-5 text-base items-center cursor-pointer"
+            className="flex flex-row gap-5  items-center cursor-pointer text-sm"
             onClick={() => {
               router.push(`/products?filter[search]=${data}`);
             }}

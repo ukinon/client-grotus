@@ -20,7 +20,7 @@ export default function OurProduct() {
           {productLoading && <OurProductLoading />}
           {productData &&
             productData?.data.data.map((item: Product, index: number) => (
-              <MainProductCard key={index} data={item} className="w-[170px]" />
+              <MainProductCard key={index} data={item} className="w-[180px]" />
             ))}
           <Link className="text-sm text-primary-500 font-bold" href="/products">
             Semua

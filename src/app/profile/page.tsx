@@ -11,11 +11,11 @@ import LoadingPage from "@/components/ui/LoadingPage";
 export default function ProfilePage() {
   const { userData, userLoading } = useGetCurrentUser();
   return (
-    <main className="flex min-h-[75dvh] flex-col items-center justify-center">
+    <main className="flex min-h-[75dvh] flex-col items-center justify-start">
       {userLoading && <LoadingPage />}
       <Navbar title="Profil" />
       {!userData && (
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center h-[75dvh]">
           <Link href={"/login"}>
             <Button className="bg-primary-500 text-white w-[30vw]">
               Masuk
