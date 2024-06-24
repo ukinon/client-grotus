@@ -98,23 +98,23 @@ const PredictPage: React.FC = () => {
       setTimeout(() => {
         setFlash(false);
         const context = canvasRef.current?.getContext("2d");
-        if (context) {
+        if (context && videoRef.current && canvasRef.current) {
           // Set canvas dimensions to match video dimensions
-          canvasRef.current?.width == videoRef.current?.videoWidth;
-          canvasRef.current?.height == videoRef.current?.videoHeight;
+          canvasRef.current.width = videoRef.current.videoWidth;
+          canvasRef.current.height = videoRef.current.videoHeight;
 
           // Draw the video frame to the canvas
           context.drawImage(
             videoRef.current as HTMLVideoElement,
             0,
             0,
-            canvasRef.current?.width as number,
-            canvasRef.current?.height as number
+            canvasRef.current.width,
+            canvasRef.current.height
           );
 
           // Get the image data from the canvas
-          const imageSrc = canvasRef.current?.toDataURL("image/jpeg");
-          setPhoto(imageSrc as string);
+          const imageSrc = canvasRef.current.toDataURL("image/jpeg");
+          setPhoto(imageSrc);
           setIsModalOpen(true);
         }
       }, 200);
