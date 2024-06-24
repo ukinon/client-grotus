@@ -1,6 +1,9 @@
 "use client";
 
+import CartLoading from "@/app/cart/CartLoading";
 import { Input } from "@/components/ui/input";
+import { useGetCurrentUser } from "@/hooks/auth";
+import { useGetCarts } from "@/hooks/cart";
 import { axiosInstance } from "@/lib/axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -34,6 +37,12 @@ export default function Navbar({
   const router = useRouter();
   const isAuthenticated = useIsAuthenticated();
   const authHeader = useAuthHeader();
+  const { userData, userLoading } = useGetCurrentUser();
+  const { cartData, cartLoading } = useGetCarts({
+    id: userData?.data.id,
+    query: "?perPage=1000000000",
+  });
+  console.log(cartData);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -74,9 +83,26 @@ export default function Navbar({
         )}
       </div>
       {withCart && (
-        <Link href="/cart" className="ml-3">
-          <CiShoppingCart className="text-2xl" />
-        </Link>
+        <>
+          {(userLoading || cartLoading) && (
+            <Link href="/cart" className="ml-3 relative flex flex-col">
+              <div className="absolute top-0 -right-1">
+                <div className="flex flex-row justify-center items-center text-lg">
+                  <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-primary-800"></div>
+                </div>
+              </div>
+              <CiShoppingCart className="text-2xl" />
+            </Link>
+          )}
+          {userData && cartData && (
+            <Link href="/cart" className="ml-3 relative">
+              <div className="absolute top-0 -right-1 text-[0.6rem] bg-primary-800 text-white rounded-full px-1">
+                {cartData?.data.length}
+              </div>
+              <CiShoppingCart className="text-2xl" />
+            </Link>
+          )}
+        </>
       )}
     </div>
   );

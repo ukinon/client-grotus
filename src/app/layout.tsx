@@ -20,7 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <Providers>
-      <html lang="en">
+      <html lang="id-ID">
+        <head>
+          <link rel="manifest" href="/manifest.json" />
+        </head>
         <body className={poppins.className}>
           <Suspense fallback={<LoadingPage />}>
             <div className="mt-[8dvh] mb-[11dvh]">{children}</div>

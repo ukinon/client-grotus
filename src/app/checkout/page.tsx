@@ -94,7 +94,25 @@ export default function CheckoutPage() {
         </div>
 
         <div className="flex flex-col gap-2 border border-primary-500/50 p-3 w-[95%] rounded-lg">
-          <h1 className="text-sm font-bold">Metode Pembayaran</h1>
+          <h1 className="text-sm font-bold">Pilih Pengiriman</h1>
+          <Select>
+            <SelectTrigger className="w-full text-xs">
+              <SelectValue placeholder="Pilih Metode Pengiriman" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Metode Pengiriman</SelectLabel>
+                <SelectItem value="JNE">JNE ({formatToIDR(9000)})</SelectItem>
+                <SelectItem value="Arfiano">
+                  Pengiriman Arfiano ({formatToIDR(2000000000000)})
+                </SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="flex flex-col gap-2 border border-primary-500/50 p-3 w-[95%] rounded-lg">
+          <h1 className="text-sm font-bold">Pilih Pembayaran</h1>
           <Select onValueChange={(e) => setPreferredPayment(e)}>
             <SelectTrigger className="w-full text-xs">
               <SelectValue placeholder="Pilih Metode Pembayaran" />
@@ -108,9 +126,24 @@ export default function CheckoutPage() {
           </Select>
         </div>
 
-        <div className="flex flex-row items-center justify-between border border-primary-500/50 p-3 w-[95%] rounded-lg">
-          <h1 className="text-sm">Total Harga</h1>
-          <p className="font-bold text-sm">{formatToIDR(total)}</p>
+        <div className="flex flex-col  border border-primary-500/50 p-3 w-[95%] rounded-lg gap-5">
+          <h1 className="text-sm font-bold">Ringkasan Belanja</h1>
+
+          <div className="flex flex-col gap-2">
+            <div className="flex flex-row justify-between">
+              <h1 className="text-xs">Harga Produk</h1>
+              <p className="text-xs">{formatToIDR(total)}</p>
+            </div>
+            <div className="flex flex-row justify-between">
+              <h1 className="text-xs">Ongkos Kirim</h1>
+              <p className="text-xs">{formatToIDR(total)}</p>
+            </div>
+          </div>
+
+          <div className="flex flex-row justify-between">
+            <h1 className="text-sm">Total Harga</h1>
+            <p className="font-bold text-sm">{formatToIDR(total)}</p>
+          </div>
         </div>
 
         <Button

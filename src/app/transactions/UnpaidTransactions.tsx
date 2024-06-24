@@ -6,6 +6,7 @@ import WishlistLoading from "../wishlist/WishlistLoading";
 import TransactionProductCard from "@/components/product/TransactionProductCard";
 import { Product } from "@/types/Product";
 import { Transaction } from "@/types/Transaction";
+import TransactionLoading from "./TransactionLoading";
 
 export default function UnpaidTransactions() {
   const { transactionData, transactionLoading } =
@@ -15,7 +16,7 @@ export default function UnpaidTransactions() {
     <>
       {transactionLoading && (
         <div className="flex flex-col mt-12 w-full items-center gap-2">
-          <WishlistLoading />
+          <TransactionLoading />
         </div>
       )}
       {transactionData && (

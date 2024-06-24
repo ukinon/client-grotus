@@ -1,10 +1,16 @@
 import Navbar from "@/components/layout/Navbar";
+import MainProductCard from "@/components/product/MainProductCard";
 import { Button } from "@/components/ui/button";
+import { Product } from "@/types/Product";
 import Image from "next/image";
 import React from "react";
+import ProductRecommendation from "./ProductRecommendation";
 
 type Props = {
-  data: string;
+  data: {
+    keyword: string;
+    prediction: string;
+  };
   photo: string;
 };
 
@@ -21,7 +27,7 @@ export default function PredictionPage({ data, photo }: Props) {
           className="w-full rounded-lg aspect-square object-cover"
         />
 
-        <p className="font-bold text-xl">{data}</p>
+        <p className="font-bold text-xl">{data.prediction}</p>
         <Button
           onClick={() => window.location.reload()}
           className="bg-primary-500 text-white"
@@ -29,9 +35,7 @@ export default function PredictionPage({ data, photo }: Props) {
           Ambil foto lain
         </Button>
       </div>
-      <div className="flex flex-col w-[90vw]">
-        <h1 className="font-bold text-xl">Rekomendasi Produk</h1>
-      </div>
+      <ProductRecommendation nutrition={data.keyword} />
     </div>
   );
 }

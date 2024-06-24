@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import Webcam from "react-webcam";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { BiCamera, BiPhotoAlbum, BiRotateLeft, BiSend } from "react-icons/bi";
 import { RxCaretLeft } from "react-icons/rx";
 import Navbar from "@/components/layout/Navbar";
@@ -14,10 +13,16 @@ import PredictionPage from "./PredictionPage";
 const PredictPage: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [photo, setPhoto] = useState<string | null>(null);
-  const [facingMode, setFacingMode] = useState<"user" | "environment">("user");
+  const [cameraFacing, setCameraFacing] = useState<"user" | "environment">(
+    "environment"
+  );
+  const [isMirrored, setIsMirrored] = useState(true);
   const [flash, setFlash] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const webcamRef = useRef<Webcam>(null);
+  const [stream, setStream] = useState<MediaStream | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
   const { mutate, data, isPending } = useMutation({
     mutationFn: async (formData: FormData) => {
       const response = await axiosInstanceML.post("/predict", formData, {
@@ -25,7 +30,6 @@ const PredictPage: React.FC = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-
       return response.data;
     },
     onSuccess: (data) => {
@@ -36,37 +40,83 @@ const PredictPage: React.FC = () => {
     },
   });
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      setSelectedFile(event.target.files[0]);
-      setIsModalOpen(true);
-    }
-  };
+  useEffect(() => {
+    const setupCamera = async () => {
+      try {
+        const constraints: MediaStreamConstraints = {
+          video: {
+            facingMode: cameraFacing,
+            width: { ideal: 1920 },
+            height: { ideal: 1080 },
+          },
+        };
+        const newStream = await navigator.mediaDevices.getUserMedia(
+          constraints
+        );
+        setStream(newStream);
+        if (videoRef.current) {
+          videoRef.current.srcObject = newStream;
+          videoRef.current.onloadedmetadata = () => {
+            videoRef.current?.play();
+          };
+        }
+        setIsMirrored(cameraFacing === "user");
+      } catch (error) {
+        console.error("Error accessing the camera:", error);
+      }
+    };
+    setupCamera();
+    return () => {
+      if (stream) {
+        stream.getTracks().forEach((track) => track.stop());
+      }
+    };
+  }, [cameraFacing, stream]);
 
-  const handleTakePhoto = () => {
-    if (webcamRef.current) {
-      setFlash(true); // Simulate flash
+  const handleRotateCamera = useCallback(() => {
+    setCameraFacing((prev) => (prev === "user" ? "environment" : "user"));
+  }, []);
+
+  const handleFileChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (event.target.files && event.target.files[0]) {
+        setSelectedFile(event.target.files[0]);
+        setIsModalOpen(true);
+      }
+    },
+    []
+  );
+
+  const handleTakePhoto = useCallback(() => {
+    if (videoRef.current && canvasRef.current) {
+      setFlash(true);
       setTimeout(() => {
         setFlash(false);
-        const imageSrc = webcamRef.current?.getScreenshot();
-        setPhoto(imageSrc as string);
-        setIsModalOpen(true);
+        const context = canvasRef.current?.getContext("2d");
+        if (context) {
+          canvasRef.current?.width == videoRef.current?.videoWidth;
+          canvasRef.current?.height == videoRef.current?.videoHeight;
+          context.drawImage(
+            videoRef.current as HTMLVideoElement,
+            0,
+            0,
+            canvasRef.current?.width as number,
+            canvasRef.current?.height as number
+          );
+          const imageSrc = canvasRef.current?.toDataURL("image/jpeg");
+          setPhoto(imageSrc as string);
+          setIsModalOpen(true);
+        }
       }, 200);
     }
-  };
-
-  const handleRotateCamera = () => {
-    setFacingMode((prevMode) => (prevMode === "user" ? "environment" : "user"));
-  };
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     if (!selectedFile && !photo) {
       alert("Please select a file or take a photo first!");
       return;
     }
-
     const formData = new FormData();
     if (selectedFile) {
       formData.append("file", selectedFile);
@@ -76,38 +126,34 @@ const PredictPage: React.FC = () => {
       const blob = await response.blob();
       formData.append("file", blob, "photo.jpg");
     }
-
-    try {
-      mutate(formData);
-    } catch (error) {
-      console.error("Error uploading the file:", error);
-    }
+    mutate(formData);
   };
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setIsModalOpen(false);
     setSelectedFile(null);
     setPhoto(null);
-  };
+  }, []);
 
   return (
-    <div className="h-[100dvh] overflow-hidden relative -mt-[8dvh]">
+    <div className="min-h-[100dvh] overflow-hidden relative -mt-[8dvh]">
       {isPending && <LoadingPage />}
       {!data && (
         <>
           <Navbar withBackButton withCart={false} bgColor="bg-transparent" />
           {flash && <div className="flash-overlay"></div>}
           <div className="flex flex-col h-full">
-            <Webcam
-              audio={false}
-              ref={webcamRef}
-              screenshotFormat="image/jpeg"
-              width="100%"
-              height="auto"
-              mirrored
-              videoConstraints={{ facingMode }}
+            <video
+              ref={videoRef}
+              autoPlay
+              playsInline
+              muted
               className="w-full h-[100dvh] object-cover"
+              style={{
+                transform: isMirrored ? "scaleX(-1)" : "none",
+              }}
             />
+            <canvas ref={canvasRef} style={{ display: "none" }} />
             <div className="flex flex-row fixed bottom-0 w-full items-center justify-between h-[15vh] px-8 bg-transparent rounded-t-lg pb-6">
               <input
                 className="hidden"
@@ -153,13 +199,13 @@ const PredictPage: React.FC = () => {
                   </div>
                 )}
                 {photo && (
-                  <div>
+                  <div className="w-screen h-screen object-cover">
                     <Image
                       src={photo}
                       alt="Taken"
                       width={100}
                       height={100}
-                      className="w-full h-[100dvh] object-cover"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                 )}
@@ -173,7 +219,6 @@ const PredictPage: React.FC = () => {
                       <BiSend className="text-4xl" />
                     </button>
                   </div>
-
                   <RxCaretLeft
                     onClick={closeModal}
                     className="text-4xl bg-white rounded-full fixed top-5 left-5"
@@ -182,7 +227,6 @@ const PredictPage: React.FC = () => {
               </div>
             </div>
           )}
-
           <style jsx>{`
             .flash-overlay {
               position: absolute;
@@ -199,7 +243,7 @@ const PredictPage: React.FC = () => {
       )}
       {data && (
         <PredictionPage
-          data={data.prediction}
+          data={data}
           photo={
             selectedFile
               ? URL.createObjectURL(selectedFile as File)
