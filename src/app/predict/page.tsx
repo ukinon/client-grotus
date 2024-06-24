@@ -1,7 +1,13 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useCallback } from "react";
-import { BiCamera, BiPhotoAlbum, BiRotateLeft, BiSend } from "react-icons/bi";
+import React, { useState, useRef, useEffect } from "react";
+import {
+  BiCamera,
+  BiPhotoAlbum,
+  BiRotateLeft,
+  BiSend,
+  BiAdjust,
+} from "react-icons/bi";
 import { RxCaretLeft } from "react-icons/rx";
 import Navbar from "@/components/layout/Navbar";
 import Image from "next/image";
@@ -30,6 +36,7 @@ const PredictPage: React.FC = () => {
           "Content-Type": "multipart/form-data",
         },
       });
+
       return response.data;
     },
     onSuccess: (data) => {
@@ -41,7 +48,7 @@ const PredictPage: React.FC = () => {
   });
 
   useEffect(() => {
-    const setupCamera = async () => {
+    async function setupCamera() {
       try {
         const constraints: MediaStreamConstraints = {
           video: {
@@ -60,42 +67,43 @@ const PredictPage: React.FC = () => {
             videoRef.current?.play();
           };
         }
+        // Set mirroring based on camera facing
         setIsMirrored(cameraFacing === "user");
       } catch (error) {
         console.error("Error accessing the camera:", error);
       }
-    };
+    }
     setupCamera();
     return () => {
       if (stream) {
         stream.getTracks().forEach((track) => track.stop());
       }
     };
-  }, [cameraFacing, stream]);
+  }, [cameraFacing]);
 
-  const handleRotateCamera = useCallback(() => {
+  const handleRotateCamera = () => {
     setCameraFacing((prev) => (prev === "user" ? "environment" : "user"));
-  }, []);
+  };
 
-  const handleFileChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (event.target.files && event.target.files[0]) {
-        setSelectedFile(event.target.files[0]);
-        setIsModalOpen(true);
-      }
-    },
-    []
-  );
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      setSelectedFile(event.target.files[0]);
+      setIsModalOpen(true);
+    }
+  };
 
-  const handleTakePhoto = useCallback(() => {
+  const handleTakePhoto = () => {
     if (videoRef.current && canvasRef.current) {
       setFlash(true);
       setTimeout(() => {
         setFlash(false);
         const context = canvasRef.current?.getContext("2d");
         if (context) {
+          // Set canvas dimensions to match video dimensions
           canvasRef.current?.width == videoRef.current?.videoWidth;
           canvasRef.current?.height == videoRef.current?.videoHeight;
+
+          // Draw the video frame to the canvas
           context.drawImage(
             videoRef.current as HTMLVideoElement,
             0,
@@ -103,20 +111,24 @@ const PredictPage: React.FC = () => {
             canvasRef.current?.width as number,
             canvasRef.current?.height as number
           );
+
+          // Get the image data from the canvas
           const imageSrc = canvasRef.current?.toDataURL("image/jpeg");
           setPhoto(imageSrc as string);
           setIsModalOpen(true);
         }
       }, 200);
     }
-  }, []);
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     if (!selectedFile && !photo) {
       alert("Please select a file or take a photo first!");
       return;
     }
+
     const formData = new FormData();
     if (selectedFile) {
       formData.append("file", selectedFile);
@@ -126,14 +138,19 @@ const PredictPage: React.FC = () => {
       const blob = await response.blob();
       formData.append("file", blob, "photo.jpg");
     }
-    mutate(formData);
+
+    try {
+      mutate(formData);
+    } catch (error) {
+      console.error("Error uploading the file:", error);
+    }
   };
 
-  const closeModal = useCallback(() => {
+  const closeModal = () => {
     setIsModalOpen(false);
     setSelectedFile(null);
     setPhoto(null);
-  }, []);
+  };
 
   return (
     <div className="min-h-[100dvh] overflow-hidden relative -mt-[8dvh]">
@@ -219,6 +236,7 @@ const PredictPage: React.FC = () => {
                       <BiSend className="text-4xl" />
                     </button>
                   </div>
+
                   <RxCaretLeft
                     onClick={closeModal}
                     className="text-4xl bg-white rounded-full fixed top-5 left-5"
@@ -227,6 +245,7 @@ const PredictPage: React.FC = () => {
               </div>
             </div>
           )}
+
           <style jsx>{`
             .flash-overlay {
               position: absolute;
