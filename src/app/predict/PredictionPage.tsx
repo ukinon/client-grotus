@@ -1,7 +1,5 @@
 import Navbar from "@/components/layout/Navbar";
-import MainProductCard from "@/components/product/MainProductCard";
 import { Button } from "@/components/ui/button";
-import { Product } from "@/types/Product";
 import Image from "next/image";
 import React from "react";
 import ProductRecommendation from "./ProductRecommendation";
