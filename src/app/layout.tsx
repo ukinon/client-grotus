@@ -23,6 +23,7 @@ export default function RootLayout({
       <html lang="id-ID">
         <head>
           <link rel="manifest" href="/manifest.json" />
+          <link rel="icon" href="/icon-192x192.png" sizes="192x192" />
         </head>
         <body className={poppins.className}>
           <Suspense fallback={<LoadingPage />}>
