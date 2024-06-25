@@ -25,6 +25,11 @@ const nextConfig = withPWA({
         hostname: "encrypted-tbn0.gstatic.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "grotus.dzakynashshar.com",
+        port: "",
+      },
     ],
   },
 });

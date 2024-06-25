@@ -42,18 +42,25 @@ export default function ProfileForm({ data }: { data: UserData }) {
       phone: data.profile?.phone,
     },
   });
+  console.log(data);
   const { updateProfileMutation, updateProfilePending } = useUpdateProfile();
   const [currentImage, setCurrentImage] = useState<FileUpload>({
     profile_photo: null,
   });
   const handleRegister = (value: z.infer<typeof profileFormSchema>) => {
-    console.log(value);
+    console.log({
+      ...value,
+      profile_photo: currentImage.profile_photo,
+    });
     updateProfileMutation({
       id: data?.id as number,
       data: {
         profile_photo: currentImage.profile_photo as File,
         ...value,
       },
+    });
+    setCurrentImage({
+      profile_photo: null,
     });
   };
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,7 +101,9 @@ export default function ProfileForm({ data }: { data: UserData }) {
                       ? URL.createObjectURL(
                           currentImage.profile_photo as MediaSource
                         )
-                      : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6odCdKUQilIgIODW2d3aYXeYIdQ30VIG4d6-_bUXl3Q&s"
+                      : (data.profile?.profile_photo as string)
+                      ? (data.profile?.profile_photo as string)
+                      : "https://via.placeholder.com/150"
                   }
                   width={100}
                   height={100}

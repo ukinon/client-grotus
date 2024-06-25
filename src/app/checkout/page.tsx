@@ -22,6 +22,13 @@ import CheckoutItemsLoading from "./CheckoutItemsLoading";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAddTransaction } from "@/hooks/transaction";
 import { useRouter } from "next/navigation";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { RxCaretDown, RxHome, RxPerson } from "react-icons/rx";
+import { BiPhone } from "react-icons/bi";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -71,8 +78,18 @@ export default function CheckoutPage() {
           )}
           {!userLoading && userData && userData?.data.profile.address && (
             <div className="flex flex-col gap-2">
-              <p className="font-bold text-sm">{userData?.data.profile.name}</p>
-              <p className="text-xs">{userData?.data.profile.address}</p>
+              <p className="font-bold text-sm flex gap-2 items-center">
+                <RxPerson />
+                {userData?.data.profile.name}
+              </p>
+              <p className="text-xs flex gap-2 items-center">
+                <RxHome className="text-xl" />
+                {userData?.data.profile.address}
+              </p>
+              <p className="text-xs flex gap-1 items-center">
+                <BiPhone className="text-xl text-zinc-600" />
+                {`+${userData?.data.profile.phone}`}
+              </p>
             </div>
           )}
           {!userLoading && userData && !userData?.data.profile.address && (
@@ -88,9 +105,27 @@ export default function CheckoutPage() {
           <h1 className="text-sm font-bold px-3">Produk</h1>
 
           {cartLoading && <CheckoutItemsLoading />}
-          {cartData?.data.map((item: Cart, index: number) => (
-            <CheckoutProductDetail key={index} data={item} />
-          ))}
+          {cartData && !cartLoading && (
+            <CheckoutProductDetail data={cartData?.data[0]} />
+          )}
+          {cartData?.data.length > 1 && (
+            <Collapsible>
+              <CollapsibleTrigger className="text-xs w-full  flex flex-col justify-between pl-4 pr-2">
+                <div className="flex flex-row w-full justify-between mb-3 items-center">
+                  <p> +{cartData?.data.length - 1} Lainnya</p>
+                  <RxCaretDown className="text-xl" />
+                </div>
+              </CollapsibleTrigger>
+              <CollapsibleContent className="space-y-3">
+                {cartData?.data.map(
+                  (item: Cart, index: number) =>
+                    index != 0 && (
+                      <CheckoutProductDetail key={index} data={item} />
+                    )
+                )}
+              </CollapsibleContent>
+            </Collapsible>
+          )}
         </div>
 
         <div className="flex flex-col gap-2 border border-primary-500/50 p-3 w-[95%] rounded-lg">

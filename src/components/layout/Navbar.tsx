@@ -96,9 +96,12 @@ export default function Navbar({
           )}
           {userData && cartData && (
             <Link href="/cart" className="ml-3 relative">
-              <div className="absolute top-0 -right-1 text-[0.6rem] bg-primary-800 text-white rounded-full px-1">
-                {cartData?.data.length}
-              </div>
+              {cartData.data.length > 0 && (
+                <div className="absolute top-0 -right-1 text-[0.6rem] bg-primary-800 text-white rounded-full px-1">
+                  {cartData?.data.length}
+                </div>
+              )}
+
               <CiShoppingCart className="text-2xl" />
             </Link>
           )}

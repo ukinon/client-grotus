@@ -12,7 +12,8 @@ export default function CheckoutProductDetail({ data }: Props) {
       <div className="flex flex-row gap-3 w-full">
         <Image
           src={
-            (data.product.photo as string) || "https://via.placeholder.com/150"
+            (data?.product?.photo as string) ||
+            "https://via.placeholder.com/150"
           }
           width={50}
           height={50}
@@ -22,12 +23,12 @@ export default function CheckoutProductDetail({ data }: Props) {
         <div className="flex flex-col gap-2 w-full">
           <div className="flex justify-between">
             <h1 className="font-bold text-xs line-clamp-1">
-              {data.product.name}
+              {data?.product.name}
             </h1>
-            <p className="font-bold text-xs">x{data.amount}</p>
+            <p className="font-bold text-xs">x{data?.amount}</p>
           </div>
           <p className=" font-bold text-xs">
-            {formatToIDR(data.product.price as number)}
+            {formatToIDR(data?.product.price as number)}
           </p>
         </div>
       </div>

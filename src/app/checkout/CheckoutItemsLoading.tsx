@@ -6,12 +6,9 @@ import { Cart } from "@/types/Cart";
 
 export default function CheckoutItemsLoading() {
   return (
-    <div className="w-full h-full flex flex-col gap-2 p-3">
-      {Array(3)
-        .fill(null)
-        .map((index: number) => (
-          <Skeleton className="w-full h-[8dvh] bg-zinc-300" key={index} />
-        ))}
+    <div className="w-full h-full flex flex-col gap-4 p-3">
+      <Skeleton className="w-full h-[8dvh] bg-zinc-300" />
+      <Skeleton className="w-full h-[2dvh] bg-zinc-300" />
     </div>
   );
 }
