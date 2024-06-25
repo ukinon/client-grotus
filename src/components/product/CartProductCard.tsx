@@ -14,7 +14,7 @@ export default function CartProductCard({ data }: Props) {
   const { deleteMutation } = useDelete({
     id: data.id as number,
     path: "cart",
-    queryKey: "get-carts",
+    queryKey: ["get-carts"],
   });
 
   const handleDelete = async () => {

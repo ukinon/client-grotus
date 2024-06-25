@@ -139,7 +139,7 @@ export default function CheckoutPage() {
                 <SelectLabel>Metode Pengiriman</SelectLabel>
                 <SelectItem value="JNE">JNE ({formatToIDR(9000)})</SelectItem>
                 <SelectItem value="Arfiano">
-                  Pengiriman Arfiano ({formatToIDR(2000000000000)})
+                  Pengiriman Arfiano ({formatToIDR(2000)})
                 </SelectItem>
               </SelectGroup>
             </SelectContent>
@@ -156,6 +156,12 @@ export default function CheckoutPage() {
               <SelectGroup>
                 <SelectLabel>Metode Pembayaran</SelectLabel>
                 <SelectItem value="BCA">BCA</SelectItem>
+                <SelectItem value="BRI">BRI</SelectItem>
+                <SelectItem value="Mandiri">Mandiri</SelectItem>
+                <SelectItem value="BNI">BNI</SelectItem>
+                <SelectItem value="COD">COD</SelectItem>
+                <SelectItem value="GoPay">BCA</SelectItem>
+                <SelectItem value="OVO">OVO</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>

@@ -33,7 +33,7 @@ export default function ProductPage() {
   const { deleteMutation } = useDelete({
     id: data?.data.id as number,
     path: "wishlist",
-    queryKey: "get-wishlists",
+    queryKey: ["get-product", "get-wishlists"],
   });
 
   const handleDelete = async () => {
@@ -54,24 +54,24 @@ export default function ProductPage() {
           <div className="flex flex-col gap-4 w-[90%] ">
             <ProductCarousel />
             <div className="flex flex-col gap-2 border-b-2 pb-3">
-              <h1 className="text-2xl font-bold mt-4">{data?.data.name}</h1>
-              <p className="text-lg font-semibold">
+              <h1 className="text-xl font-bold mt-4">{data?.data.name}</h1>
+              <p className="text-xl font-semibold">
                 {formatToIDR(data?.data.price as number)}
               </p>
               <div className="flex flex-row items-center justify-between">
                 <div className="flex flex-row items-center gap-2">
-                  <RxStarFilled className="text-yellow-500 text-2xl" />
+                  <RxStarFilled className="text-yellow-500 text-xl" />
                   <p>{data?.data.rating || 0}</p>
                 </div>
                 {data?.data.saved ? (
                   <RxHeartFilled
                     onClick={() => handleDelete()}
-                    className="text-red-500 text-2xl"
+                    className="text-red-500 text-xl"
                   />
                 ) : (
                   <RxHeart
                     onClick={() => handleAddToWishlist()}
-                    className="text-red-500 text-2xl"
+                    className="text-red-500 text-xl"
                   />
                 )}
               </div>

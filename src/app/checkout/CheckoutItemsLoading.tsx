@@ -1,8 +1,4 @@
-"use client";
-
-import CheckoutBar from "@/components/layout/CheckoutBar";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Cart } from "@/types/Cart";
 
 export default function CheckoutItemsLoading() {
   return (
