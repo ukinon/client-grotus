@@ -30,6 +30,7 @@ export default function MainProductCard({ data, className }: Props) {
             height={150}
             alt="product image"
             className="w-full rounded-lg"
+            priority
           />
           <div className="flex justify-between items-center w-full">
             <h1 className="font-bold text-sm w-full line-clamp-1">

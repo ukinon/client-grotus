@@ -6,7 +6,7 @@ export default function OurProductLoading() {
     <>
       {Array(3)
         .fill(null)
-        .map((index: number) => (
+        .map((_, index: number) => (
           <Skeleton className="w-[180px] h-[270px] bg-zinc-300" key={index} />
         ))}
     </>

@@ -8,7 +8,7 @@ export default function TransactionLoading() {
     <>
       {Array(3)
         .fill(null)
-        .map((index: number) => (
+        .map((_, index: number) => (
           <Skeleton className="w-[95vw] h-[22dvh] bg-zinc-300" key={index} />
         ))}
       <CheckoutBar total={0} loading={true} />

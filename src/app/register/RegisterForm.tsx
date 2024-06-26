@@ -2,14 +2,14 @@
 
 import FormInput from "@/components/inputs/FormInput";
 import { Button } from "@/components/ui/button";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import { RxEnvelopeClosed, RxLockClosed, RxPerson } from "react-icons/rx";
-import { useRegister } from "@/hooks/auth";
-import { useRouter } from "next/navigation";
+import { useLogin, useRegister } from "@/hooks/auth";
+import useSignIn from "react-auth-kit/hooks/useSignIn";
 
 const registerFormSchema = z.object({
   name: z.string().min(3),
@@ -19,21 +19,34 @@ const registerFormSchema = z.object({
 });
 
 export default function RegisterForm() {
-  const router = useRouter();
   const form = useForm<z.infer<typeof registerFormSchema>>({
     resolver: zodResolver(registerFormSchema),
     mode: "onChange",
   });
-  const { registerMutation, registerPending, registerSuccess } = useRegister();
+  const { registerMutation, registerPending } = useRegister();
+  const { loginMutation, loginSuccess, loginData } = useLogin();
+  const signIn = useSignIn();
 
   useEffect(() => {
-    if (registerSuccess) {
-      router.push("/login");
+    if (loginSuccess) {
+      if (
+        signIn({
+          auth: {
+            token: loginData?.data.access_token,
+            type: loginData?.data.token_type,
+          },
+        })
+      ) {
+        window.location.replace("/");
+      }
     }
-  }, [registerSuccess]);
+  }, [loginSuccess, loginData, signIn]);
 
-  const handleRegister = (data: z.infer<typeof registerFormSchema>) => {
-    registerMutation({
+  const handleRegister = async (data: z.infer<typeof registerFormSchema>) => {
+    await registerMutation({
+      ...data,
+    });
+    await loginMutation({
       ...data,
     });
   };
