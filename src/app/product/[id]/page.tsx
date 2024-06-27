@@ -22,6 +22,7 @@ import LoadingPage from "@/components/ui/LoadingPage";
 import { useDelete } from "@/hooks/delete";
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstanceML } from "@/lib/axios";
+import ProductsLoading from "@/app/products/ProductsLoading";
 
 export default function ProductPage() {
   const params = useParams();
@@ -39,10 +40,12 @@ export default function ProductPage() {
   });
   const { data: products, isLoading: productsLoading } = useQuery({
     queryFn: async () => {
-      const response = await axiosInstanceML.get(`/recommend/${data?.data.id}`);
+      const response = await axiosInstanceML.get(
+        `/recommend/${data?.data.id}?limit=6`
+      );
       return response.data;
     },
-    queryKey: ["get-recommendation", data?.data.id],
+    queryKey: ["get-recommendations", data?.data.id],
   });
 
   const handleDelete = async () => {
@@ -121,15 +124,18 @@ export default function ProductPage() {
                 Produk Serupa
               </h1>
               <div className="flex overflow-x-hidden justify-center w-full">
-                <div className="grid grid-cols-2 gap-2">
-                  {products?.map((item: Product, index: number) => (
-                    <MainProductCard
-                      key={index}
-                      data={item}
-                      className="col-span-1"
-                    />
-                  ))}
-                </div>
+                {productsLoading && <ProductsLoading className="mt-0" />}
+                {products && (
+                  <div className="grid grid-cols-2 gap-2">
+                    {products?.map((item: Product, index: number) => (
+                      <MainProductCard
+                        key={index}
+                        data={item}
+                        className="col-span-1"
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
