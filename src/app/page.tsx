@@ -2,6 +2,7 @@ import { CarouselComponent } from "../components/Carousel";
 import Navbar from "../components/layout/Navbar";
 import BottomBar from "../components/layout/BottomBar";
 import OurProduct from "@/components/OurProduct";
+import Categories from "@/components/Categories";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <div className="w-[90%]">
         <CarouselComponent />
       </div>
+      <Categories />
       <OurProduct />
       <BottomBar />
     </main>

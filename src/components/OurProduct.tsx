@@ -8,24 +8,21 @@ import { useGetProducts } from "@/hooks/product";
 import OurProductLoading from "./OurProductLoading";
 
 export default function OurProduct() {
-  const { productData, productLoading } = useGetProducts("?perPage=3");
+  const { productData, productLoading } = useGetProducts("?perPage=4");
   return (
     <div className="flex flex-col gap-5 w-screen items-center">
-      <h1 className="text-2xl font-bold mt-4 pl-7 self-start">Produk Kami</h1>
-      <div className="flex overflow-x-auto w-full">
-        <div
-          className="flex gap-3 mx-5 items-center"
-          style={{ minWidth: "max-content" }}
-        >
-          {productLoading && <OurProductLoading />}
-          {productData &&
-            productData?.data.data.map((item: Product, index: number) => (
-              <MainProductCard key={index} data={item} className="w-[180px]" />
-            ))}
-          <Link className="text-sm text-primary-500 font-bold" href="/products">
-            Semua
-          </Link>
-        </div>
+      <div className="flex justify-between items-center w-[90%] mt-4 px-3">
+        <h1 className="text-2xl font-bold  self-start">Produk Kami</h1>
+        <Link className="text-sm text-primary-500 font-bold" href="/products">
+          Lihat Semua
+        </Link>
+      </div>
+      <div className="grid grid-cols-2 gap-2 w-[90%]">
+        {productLoading && <OurProductLoading />}
+        {productData &&
+          productData?.data.data.map((item: Product, index: number) => (
+            <MainProductCard key={index} data={item} className="col-span-1" />
+          ))}
       </div>
     </div>
   );

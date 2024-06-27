@@ -7,14 +7,16 @@ import {
   BiRotateLeft,
   BiSend,
   BiAdjust,
+  BiArrowBack,
 } from "react-icons/bi";
-import { RxCaretLeft } from "react-icons/rx";
+import { RxCaretLeft, RxRotateCounterClockwise } from "react-icons/rx";
 import Navbar from "@/components/layout/Navbar";
 import Image from "next/image";
 import { useMutation } from "@tanstack/react-query";
 import { axiosInstanceML } from "@/lib/axios";
 import LoadingPage from "@/components/ui/LoadingPage";
 import PredictionPage from "./PredictionPage";
+import { FiRotateCcw, FiRotateCw } from "react-icons/fi";
 
 const PredictPage: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -197,7 +199,7 @@ const PredictPage: React.FC = () => {
                 className="text-black bg-white p-3 rounded-full"
                 onClick={handleRotateCamera}
               >
-                <BiRotateLeft className="text-4xl" />
+                <FiRotateCcw className="text-4xl" />
               </button>
             </div>
           </div>
@@ -228,7 +230,12 @@ const PredictPage: React.FC = () => {
                 )}
                 <form onSubmit={handleSubmit} className="mt-4">
                   <div className="flex flex-row fixed bottom-0 w-full items-center justify-between h-[15vh] px-8 bg-black bg-opacity-30 rounded-t-lg pb-6 text-white">
-                    <h1 className="text-xl">Kirim</h1>
+                    <button
+                      onClick={closeModal}
+                      className="bg-primary-500 text-white px-4 py-3 rounded-full mr-2 "
+                    >
+                      <BiArrowBack className="text-4xl" />
+                    </button>
                     <button
                       type="submit"
                       className="bg-primary-500 text-white px-4 py-3 rounded-full mr-2"

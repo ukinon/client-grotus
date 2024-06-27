@@ -10,10 +10,10 @@ type Props = {
 };
 
 export default function ProductRecommendation({ nutrition }: Props) {
-  console.log(nutrition);
   const { productData } = useGetProducts(
     `?perPage=10000000&filter[nutrition]=${nutrition}`
   );
+  console.log(productData);
 
   return (
     <div className="flex flex-col gap-8 items-center w-[90%]">

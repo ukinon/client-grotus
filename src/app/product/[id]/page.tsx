@@ -20,6 +20,8 @@ import {
 import { useParams } from "next/navigation";
 import LoadingPage from "@/components/ui/LoadingPage";
 import { useDelete } from "@/hooks/delete";
+import { useQuery } from "@tanstack/react-query";
+import { axiosInstanceML } from "@/lib/axios";
 
 export default function ProductPage() {
   const params = useParams();
@@ -34,6 +36,13 @@ export default function ProductPage() {
     id: data?.data.id as number,
     path: "wishlist",
     queryKey: ["get-product", "get-wishlists"],
+  });
+  const { data: products, isLoading: productsLoading } = useQuery({
+    queryFn: async () => {
+      const response = await axiosInstanceML.get(`/recommend/${data?.data.id}`);
+      return response.data;
+    },
+    queryKey: ["get-recommendation", data?.data.id],
   });
 
   const handleDelete = async () => {
@@ -109,19 +118,17 @@ export default function ProductPage() {
 
             <div className="flex flex-col gap-8 items-center w-full">
               <h1 className="text-2xl font-bold mt-4 self-start">
-                Produk Lainnya
+                Produk Serupa
               </h1>
               <div className="flex overflow-x-hidden justify-center w-full">
                 <div className="grid grid-cols-2 gap-2">
-                  {productData?.data.data.map(
-                    (item: Product, index: number) => (
-                      <MainProductCard
-                        key={index}
-                        data={item}
-                        className="col-span-1"
-                      />
-                    )
-                  )}
+                  {products?.map((item: Product, index: number) => (
+                    <MainProductCard
+                      key={index}
+                      data={item}
+                      className="col-span-1"
+                    />
+                  ))}
                 </div>
               </div>
             </div>
