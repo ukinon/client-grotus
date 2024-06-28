@@ -42,7 +42,7 @@ export default function Profile({ data }: Props) {
   };
 
   return (
-    <div className=" flex flex-col gap-5 items-center justify-start h-[75dvh] w-full mt-8">
+    <div className=" flex flex-col gap-5 items-center justify-start h-[75dvh] w-full mt-4">
       {logoutPending && <LoadingPage />}
       <div className="flex flex-row items-center p-5 gap-2 relative w-[90%] bg-primary-50 shadow-md rounded-xl">
         <Image

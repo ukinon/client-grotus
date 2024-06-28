@@ -51,7 +51,7 @@ export default function MainProductCard({ data, className }: Props) {
                 {formatToIDR(data.price || 0)}
               </p>
               <div className="flex flex-row gap-0.5">
-                <p className=" text-[0.6rem] text-white bg-secondary-400 rounded-full w-fit px-2 max-w-[65%] line-clamp-1 w-1.2">
+                <p className=" text-[0.5rem] overflow-hidden text-white bg-secondary-400 rounded-full w-fit px-1.5 max-w-[65%] line-clamp-1 ">
                   {data.nutrition_types &&
                     data.nutrition_types.length > 0 &&
                     data.nutrition_types[0].name}

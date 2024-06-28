@@ -36,7 +36,7 @@ export default function ProductsPage() {
             <FiFilter className="text-base" />
           </button>
         </div>
-        {productLoading && <ProductsLoading />}
+        {productLoading && <ProductsLoading className="mt-12" />}
         {productData && (
           <>
             {productData.data.data.length <= 0 && (

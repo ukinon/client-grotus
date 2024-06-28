@@ -5,7 +5,7 @@ export default function ProductsLoading({ className }: { className?: string }) {
   return (
     <>
       <div
-        className={`grid grid-cols-2 flex-wrap gap-2 justify-center mt-12 ${className}`}
+        className={`grid grid-cols-2 flex-wrap gap-2 justify-center ${className}`}
       >
         {Array(6)
           .fill(null)
