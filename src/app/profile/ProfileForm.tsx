@@ -1,33 +1,17 @@
 import FormInput from "@/components/inputs/FormInput";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useUpdateProfile } from "@/hooks/user";
-import { axiosInstance } from "@/lib/axios";
 import { FileUpload } from "@/types/FileUpload";
 import { UserData } from "@/types/UserData";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FiPhone } from "react-icons/fi";
 import { RxCalendar, RxEnvelopeClosed, RxHome, RxPerson } from "react-icons/rx";
 import { z } from "zod";
-import useSignOut from "react-auth-kit/hooks/useSignOut";
-import { set } from "lodash";
-import LoadingPage from "@/components/ui/LoadingPage";
 
 const profileFormSchema = z.object({
   name: z.string().min(3),
@@ -39,8 +23,6 @@ const profileFormSchema = z.object({
 });
 
 export default function ProfileForm({ data }: { data: UserData }) {
-  const router = useRouter();
-  const logout = useSignOut();
   const form = useForm<z.infer<typeof profileFormSchema>>({
     resolver: zodResolver(profileFormSchema),
     mode: "onChange",
@@ -57,7 +39,6 @@ export default function ProfileForm({ data }: { data: UserData }) {
   const [currentImage, setCurrentImage] = useState<FileUpload>({
     profile_photo: null,
   });
-  const [logoutPending, setLogoutPending] = useState(false);
   const handleRegister = (value: z.infer<typeof profileFormSchema>) => {
     console.log({
       ...value,
@@ -73,19 +54,6 @@ export default function ProfileForm({ data }: { data: UserData }) {
     setCurrentImage({
       profile_photo: null,
     });
-  };
-
-  const handleLogout = async () => {
-    setLogoutPending(true);
-    try {
-      logout();
-      await axiosInstance.post("/auth/logout");
-      router.push("/login");
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLogoutPending(false);
-    }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -109,7 +77,6 @@ export default function ProfileForm({ data }: { data: UserData }) {
 
   return (
     <>
-      {logoutPending && <LoadingPage />}
       {data && (
         <Form {...form}>
           <form
@@ -185,33 +152,6 @@ export default function ProfileForm({ data }: { data: UserData }) {
               Simpan
             </Button>
           </form>
-
-          <AlertDialog>
-            <AlertDialogTrigger>
-              <Button className="w-full bg-transparent text-red-500 shadow-none mt-3">
-                Keluar
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Yakin ingin keluar?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  Anda akan keluar dari akun ini
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter className="gap-3">
-                <AlertDialogCancel className="text-white bg-green-500">
-                  Tidak
-                </AlertDialogCancel>
-                <AlertDialogAction
-                  onClick={() => handleLogout()}
-                  className="text-primary-500 border-primary-500 border"
-                >
-                  Ya
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
         </Form>
       )}
     </>
