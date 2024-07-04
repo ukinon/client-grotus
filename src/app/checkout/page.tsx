@@ -189,6 +189,7 @@ export default function CheckoutPage() {
           disabled={
             !userData?.data.profile.address ||
             preferredPayment === "" ||
+            preferredShipping === "" ||
             addTransactionPending
           }
           onClick={handleAddTransaction}

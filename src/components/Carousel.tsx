@@ -10,11 +10,20 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import Image from "next/image";
 
 export function CarouselComponent() {
   const plugin = React.useRef(
     Autoplay({ delay: 5000, stopOnInteraction: true })
   );
+
+  const imageData = [
+    "/hero/image1.jpg",
+    "/hero/image2.jpg",
+    "/hero/image3.jpg",
+    "/hero/image4.jpg",
+    "/hero/image5.jpg",
+  ];
 
   return (
     <div className="relative w-full md:w-[100vw] overflow-hidden">
@@ -30,16 +39,18 @@ export function CarouselComponent() {
         className="w-full z-10"
       >
         <CarouselContent className="-ml-4">
-          {Array.from({ length: 5 }).map((_, index) => (
+          {imageData.map((data, index) => (
             <CarouselItem
               key={index}
               className="pl-4 md:basis-2/3 lg:basis-1/2"
             >
-              <Card>
-                <CardContent className="flex aspect-video items-center justify-center p-6 bg-zinc-400 rounded-none md:rounded-xl">
-                  <span className="text-4xl font-semibold">{index + 1}</span>
-                </CardContent>
-              </Card>
+              <Image
+                src={data}
+                width={500}
+                height={500}
+                alt="carousel image "
+                className="w-screen h-full object-cover aspect-video md:rounded-xl"
+              />
             </CarouselItem>
           ))}
         </CarouselContent>
