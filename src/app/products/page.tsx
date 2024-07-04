@@ -24,7 +24,7 @@ export default function ProductsPage() {
         searchPlaceholder={params.get("filter[search]") || "Cari barang..."}
       />
       <div className="flex flex-col gap-5 w-[90%]">
-        <div className="flex flex-row gap-2 w-full justify-end pr-5 fixed left-0 top-0 mt-[8dvh] py-3 bg-white border-none">
+        <div className="flex flex-row gap-2 w-full justify-end pr-5 fixed left-0 top-0 mt-[8dvh] py-3 bg-white border-none md:px-24">
           <button
             className={`bg-zinc-200 text-[0.7rem] rounded-full py-1 px-2`}
           >
@@ -36,7 +36,7 @@ export default function ProductsPage() {
             <FiFilter className="text-base" />
           </button>
         </div>
-        {productLoading && <ProductsLoading className="mt-12" />}
+        {productLoading && <ProductsLoading className="mt-12 md:grid-cols-6" />}
         {productData && (
           <>
             {productData.data.data.length <= 0 && (
@@ -45,7 +45,7 @@ export default function ProductsPage() {
               </div>
             )}
 
-            <div className="grid grid-cols-2 flex-wrap gap-2 justify-center mt-12">
+            <div className="grid grid-cols-2 md:grid-cols-6  gap-2 justify-center mt-12 md:gap-5">
               {productData?.data.data.map((product: Product) => (
                 <MainProductCard
                   data={product}

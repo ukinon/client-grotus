@@ -30,6 +30,11 @@ const nextConfig = withPWA({
         hostname: "grotus.dzakynashshar.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+        port: "",
+      },
     ],
   },
 });

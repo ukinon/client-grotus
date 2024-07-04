@@ -17,19 +17,19 @@ type Props = {
 };
 export default function MainProductCard({ data, className }: Props) {
   return (
-    <Card className={`${className} min-w-[150px]`}>
+    <Card className={`${className} min-w-[150px] h-full`}>
       <Link
         href={{
           pathname: `/product/${data.id}`,
         }}
       >
-        <CardContent className="flex flex-col gap-2 items-start justify-center p-3 bg-white border border-zinc-300 shadow-sm rounded-xl w-full">
+        <CardContent className="flex flex-col gap-2 items-start justify-center p-3 bg-white border border-zinc-300 shadow-sm rounded-xl w-full h-full">
           <Image
             src={(data.photo as string) || "https://via.placeholder.com/150"}
             width={150}
             height={150}
             alt="product image"
-            className="w-full rounded-lg"
+            className="w-full  rounded-lg"
             priority
           />
           <div className="flex justify-between items-center w-full">
@@ -51,17 +51,21 @@ export default function MainProductCard({ data, className }: Props) {
                 {formatToIDR(data.price || 0)}
               </p>
               <div className="flex flex-row gap-0.5">
-                <p className=" text-[0.5rem] overflow-hidden text-white bg-secondary-400 rounded-full w-fit px-1.5 max-w-[65%] line-clamp-1 ">
-                  {data.nutrition_types &&
-                    data.nutrition_types.length > 0 &&
-                    data.nutrition_types[0].name}
-                </p>
+                <div className="flex items-center overflow-hidden text-white bg-secondary-400 rounded-full w-fit px-1.5 max-w-[65%]">
+                  <p className=" text-[0.5rem]  line-clamp-1 ">
+                    {data.nutrition_types &&
+                      data.nutrition_types.length > 0 &&
+                      data.nutrition_types[0].name}
+                  </p>
+                </div>
 
                 {data.nutrition_types && data.nutrition_types.length > 1 && (
-                  <p className=" text-[0.6rem] text-white bg-secondary-400 rounded-full w-fit px-1.5">
-                    {" "}
-                    + {data.nutrition_types.length - 1}
-                  </p>
+                  <div className="flex items-center overflow-hidden text-white bg-secondary-400 rounded-full w-fit px-1.5 max-w-[65%]">
+                    <p className=" text-[0.5rem]  line-clamp-1 ">
+                      {" "}
+                      + {data.nutrition_types.length - 1}
+                    </p>
+                  </div>
                 )}
               </div>
             </div>

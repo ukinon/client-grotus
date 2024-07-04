@@ -18,12 +18,12 @@ export default function LoginPage() {
           <p className="text-sm">Masukkan email dan password</p>
         </div>
         <LoginForm />
-        <div className="flex flex-row justify-center w-full gap-2 items-center">
+        <div className="flex flex-row justify-center w-full gap-2 items-center md:w-[30vw]">
           <hr className="text-black w-1/4" />
           <p className="text-sm w-1/2 text-center">Belum punya akun?</p>
           <hr className="text-black w-1/4" />
         </div>
-        <Link className="w-full" href="/register">
+        <Link className="w-full md:w-[30vw]" href="/register">
           <Button className="w-full text-primary-500 bg-white border-primary-500 border">
             Daftar
           </Button>

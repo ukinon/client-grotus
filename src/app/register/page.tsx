@@ -1,9 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import InputPassword from "@/components/ui/inputPassword";
 import Link from "next/link";
 import React from "react";
-import { RxEnvelopeClosed, RxLockClosed, RxPerson } from "react-icons/rx";
 import RegisterForm from "./RegisterForm";
 
 export default function RegisterPage() {
@@ -25,12 +22,12 @@ export default function RegisterPage() {
         </div>
         <RegisterForm />
 
-        <div className="flex flex-row w-full gap-2 items-center">
+        <div className="flex flex-row w-full md:w-[30vw] gap-2 items-center">
           <hr className="text-black w-1/3" />
           <p className="text-sm w-1/3 text-center">Punya akun?</p>
           <hr className="text-black w-1/3" />
         </div>
-        <Link className="w-full" href="/login">
+        <Link className="w-full md:w-[30vw]" href="/login">
           <Button className="w-full text-primary-500 bg-white border-primary-500 border">
             Masuk
           </Button>

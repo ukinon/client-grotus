@@ -1,6 +1,7 @@
 import {
   addTransactions,
   getProductTransactions,
+  getTransaction,
   getTransactions,
   payTransactions,
 } from "@/apis/transaction";
@@ -18,6 +19,25 @@ export const useGetTransactions = (query: string) => {
     queryFn: async () => await getTransactions(query),
     staleTime: Infinity,
     queryKey: ["get-transactions", query],
+  });
+
+  return {
+    transactionData,
+    transactionLoading,
+    transactionError,
+    transactionErrorData,
+  };
+};
+export const useGetTransaction = (id: number) => {
+  const {
+    data: transactionData,
+    isLoading: transactionLoading,
+    isError: transactionError,
+    error: transactionErrorData,
+  } = useQuery({
+    queryFn: async () => await getTransaction(id),
+    staleTime: Infinity,
+    queryKey: ["get-transaction", id],
   });
 
   return {

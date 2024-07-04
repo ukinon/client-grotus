@@ -55,7 +55,7 @@ export default function RegisterForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleRegister)}
-        className="flex flex-col gap-3 items-center w-full"
+        className="flex flex-col gap-3 items-center w-full md:w-[30vw]"
       >
         <FormInput
           form={form}

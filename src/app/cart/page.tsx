@@ -6,7 +6,7 @@ import CartItems from "./CartItems";
 export default function page() {
   return (
     <NextAuth fallbackPath="/login">
-      <main className="flex min-h-[80dvh] flex-col items-center justify-start">
+      <main className="flex min-h-[80dvh] flex-col items-center justify-start md:items-start ">
         <Navbar withBackButton withCart={false} title="Keranjang" />
         <CartItems />
       </main>

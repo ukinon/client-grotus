@@ -4,6 +4,10 @@ export async function getTransactions(query: string) {
   const response = await axiosInstance.get(`/transactions${query}`);
   return response.data;
 }
+export async function getTransaction(id: number) {
+  const response = await axiosInstance.get(`/transactions/${id}`);
+  return response.data;
+}
 export async function getProductTransactions(query: string) {
   const response = await axiosInstance.get(`/transaction-products${query}`);
   return response.data;

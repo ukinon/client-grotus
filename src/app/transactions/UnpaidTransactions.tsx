@@ -2,7 +2,6 @@
 
 import { useGetTransactions } from "@/hooks/transaction";
 import React from "react";
-import WishlistLoading from "../wishlist/WishlistLoading";
 import TransactionProductCard from "@/components/product/TransactionProductCard";
 import { Product } from "@/types/Product";
 import { Transaction } from "@/types/Transaction";

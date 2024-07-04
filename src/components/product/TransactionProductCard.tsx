@@ -29,7 +29,10 @@ export default function TransactionProductCard({
   return (
     <div className="flex justify-between p-3 rounded-lg border-zinc-300 border w-full">
       <div className="flex flex-col gap-3 w-full">
-        <div className="flex flex-row gap-3 w-full">
+        <Link
+          href={`/transaction/${transactionId}`}
+          className="flex flex-row gap-3 w-full"
+        >
           <Image
             src={(data[0].photo as string) || "https://via.placeholder.com/150"}
             width={50}
@@ -47,7 +50,7 @@ export default function TransactionProductCard({
               Jumlah: {data[0].amount}
             </p>
           </div>
-        </div>
+        </Link>
         {data.length > 1 && (
           <Collapsible>
             <CollapsibleTrigger className="text-xs w-full  flex flex-col justify-between">

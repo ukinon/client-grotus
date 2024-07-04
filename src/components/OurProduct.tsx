@@ -8,7 +8,7 @@ import { useGetProducts } from "@/hooks/product";
 import OurProductLoading from "./OurProductLoading";
 
 export default function OurProduct() {
-  const { productData, productLoading } = useGetProducts("?perPage=4");
+  const { productData, productLoading } = useGetProducts("?perPage=6");
   return (
     <div className="flex flex-col gap-5 w-screen items-center">
       <div className="flex justify-between items-center w-[90%] mt-4 px-3">
@@ -17,7 +17,7 @@ export default function OurProduct() {
           Lihat Semua
         </Link>
       </div>
-      <div className="grid grid-cols-2 gap-2 w-[90%]">
+      <div className="grid grid-cols-2 gap-2 w-[90%] md:grid-cols-6 md:gap-5">
         {productLoading && <OurProductLoading />}
         {productData &&
           productData?.data.data.map((item: Product, index: number) => (

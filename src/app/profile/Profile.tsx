@@ -67,11 +67,11 @@ export default function Profile({ data }: Props) {
           className="flex flex-row gap-2 items-center "
         >
           <RxPerson className="text-primary-500" />
-          <p>Profil</p>
+          <p className="text-sm">Profil</p>
         </Link>
         <div className="flex flex-row gap-2 items-center ">
           <BiLock className="text-primary-500" />
-          <p>Ubah Password</p>
+          <p className="text-sm">Ubah Password</p>
         </div>
       </div>
       <div className="flex flex-col gap-2 rounded-xl border border-primary-200 w-[90%] px-5 py-2">
@@ -79,7 +79,7 @@ export default function Profile({ data }: Props) {
           <AlertDialogTrigger>
             <div className="flex flex-row gap-2 items-center ">
               <BiLogOut className="text-red-500" />
-              <p className="text-red-500">Keluar</p>
+              <p className="text-red-500 text-sm">Keluar</p>
             </div>
           </AlertDialogTrigger>
           <AlertDialogContent>

@@ -47,7 +47,7 @@ export default function LoginForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleLogin)}
-        className="flex flex-col gap-3 items-center w-full"
+        className="flex flex-col gap-3 items-center w-full md:w-[30vw]"
       >
         <FormInput
           form={form}

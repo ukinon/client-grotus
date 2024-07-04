@@ -7,7 +7,6 @@ import { useGetCarts } from "@/hooks/cart";
 import { Cart } from "@/types/Cart";
 import CartLoading from "./CartLoading";
 import Link from "next/link";
-import { BiCartAdd, BiCartAlt } from "react-icons/bi";
 import { CiShoppingBasket } from "react-icons/ci";
 
 export default function CartItems() {
@@ -24,10 +23,10 @@ export default function CartItems() {
   });
 
   return (
-    <div className="flex flex-col gap-2 w-[95%] mt-2 mb-2">
+    <div className="flex flex-col gap-2 w-[95%] mt-2 mb-2 md:w-[70%] md:px-24">
       {cartLoading && <CartLoading />}
       {cartData?.data.length <= 0 && !cartLoading && (
-        <div className="flex flex-col gap-2 justify-center items-center h-[80vh] text-center">
+        <div className="flex flex-col gap-2 justify-center items-center h-[80vh] text-center md:w-[85vw]">
           <CiShoppingBasket className="text-[15dvh] text-zinc-500" />
           <p>Tidak ada barang di keranjang. </p>
           <Link href="/products" className="text-primary-500 font-semibold">

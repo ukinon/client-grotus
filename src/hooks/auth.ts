@@ -21,6 +21,7 @@ export const useGetCurrentUser = () => {
     queryFn: async () => await getCurrentUser(),
     staleTime: Infinity,
     queryKey: ["get-current-user", authHeader],
+    retry: false,
   });
 
   return { userData, userLoading, userError, userErrorData, refetchUser };
