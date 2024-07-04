@@ -24,9 +24,9 @@ export default function Categories() {
   });
 
   return (
-    <div className="flex flex-col gap-4 pb-3 pt-6 w-[85%]">
+    <div className="flex flex-col gap-4 pb-3 pt-6 w-[85%] ">
       <h1 className="text-2xl font-bold">Jenis Nutrisi</h1>
-      <div className="flex flex-row md:flex-wrap gap-2 items-center justify-start rounded-xl md:py-1 md:px-6 mr-12 overflow-x-auto w-screen">
+      <div className="flex flex-row md:flex-wrap gap-2 items-center justify-start rounded-xl md:py-1 md:px-6 pr-8 overflow-x-auto w-screen">
         {nutritionLoading &&
           Array(8)
             .fill(null)
@@ -40,12 +40,12 @@ export default function Categories() {
           (item: { id: number; name: string }, index: number) => (
             <Link
               href={"/products?filter[nutrition]=" + item.name}
-              className={`flex-shrink-0 flex justify-center items-center text-center rounded-full p-2 w-20 h-20 md:w-40 font-semibold ${
+              className={`flex-shrink-0 flex justify-center items-center text-center rounded-full p-2 w-20 h-20 md:w-40 border border-zinc-400 ${
                 backgroundGradients[index % backgroundGradients.length]
               } hover:shadow-lg transition-shadow duration-300`}
               key={index}
             >
-              <p className="text-[0.55rem] md:text-xs px-2 text-neutral-800 font-medium">
+              <p className="text-[0.6rem] md:text-xs px-2 text-neutral-800 font-semibold">
                 {item.name}
               </p>
             </Link>
