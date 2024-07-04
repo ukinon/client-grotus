@@ -107,7 +107,7 @@ export default function ProductPage() {
                 )}
               </div>
 
-              <p className="text-sm text-gray-500 line-clamp-3 py-4">
+              <p className="text-sm text-gray-500 line-clamp-2 pt-4 overflow-hidden">
                 {data?.data.description}
               </p>
               <Drawer>
