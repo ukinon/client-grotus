@@ -61,7 +61,7 @@ export default function ProductPage() {
 
       {dataLoading && <LoadingPage />}
       {data && (
-        <div className="w-[90%] flex flex-col md:flex-row gap-12">
+        <div className="w-[90%] flex flex-col md:flex-row md:gap-12">
           <div className="md:w-1/2 lg:w-2/5 md:sticky top-12 md:self-start">
             <div className="flex flex-col gap-2">
               <ProductCarousel />
