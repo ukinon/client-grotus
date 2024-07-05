@@ -16,7 +16,7 @@ export function CarouselComponent() {
   );
   const ref = React.useRef(null);
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 100]);
+  const y = useTransform(scrollY, [0, 200], [0, 200]);
 
   const imageData = [
     "/hero/image1.jpg",
