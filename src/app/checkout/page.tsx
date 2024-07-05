@@ -29,6 +29,7 @@ import {
 } from "@/components/ui/collapsible";
 import { RxCaretDown, RxHome, RxPerson } from "react-icons/rx";
 import { BiPhone } from "react-icons/bi";
+import NextAuth from "@auth-kit/next/NextAuth";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -64,7 +65,7 @@ export default function CheckoutPage() {
     });
   }
   return (
-    <div className="">
+    <NextAuth fallbackPath="/login">
       <main className="flex min-h-[80dvh] flex-col gap-5 items-center justify-start">
         <Navbar withBackButton withCart={false} title="Checkout" />
         <div className="border-primary-500/50 border rounded-lg w-[95%] mt-2 p-3 flex flex-col gap-2  text-sm">
@@ -197,6 +198,6 @@ export default function CheckoutPage() {
           Lanjutkan
         </Button>
       </main>
-    </div>
+    </NextAuth>
   );
 }
