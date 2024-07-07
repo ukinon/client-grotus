@@ -10,7 +10,8 @@ export type Product = {
     user_id: number;
     rating: number;
   };
-  ratingCount?: number;
+  ratings_average?: number;
+  ratings_count?: number;
   amount?: number;
   loved?: boolean;
   nutrition_types?: NutritionType[];

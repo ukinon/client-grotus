@@ -9,7 +9,7 @@ export const useDelete = ({
 }: {
   id: number;
   path: string;
-  queryKey: string[];
+  queryKey: [string, number?][];
 }) => {
   const queryClient = useQueryClient();
   const {
@@ -22,7 +22,7 @@ export const useDelete = ({
     mutationFn: async () => await axiosInstance.delete(`/${path}/${id}`),
     onSuccess: () => {
       queryKey.map((item) => {
-        queryClient.invalidateQueries({ queryKey: [item] });
+        queryClient.invalidateQueries({ queryKey: item });
       });
       toast({
         title: "Yay!",

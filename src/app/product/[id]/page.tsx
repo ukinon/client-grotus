@@ -32,10 +32,11 @@ export default function ProductPage() {
   const { addToWishlistMutation } = useAddToWishlist({
     id: data?.data.id,
   });
+  console.log(data);
   const { deleteMutation } = useDelete({
-    id: data?.data.id as number,
+    id: data?.data.saved as number,
     path: "wishlist",
-    queryKey: ["get-product", "get-wishlists"],
+    queryKey: [["get-product", data?.data.id], ["get-wishlists"]],
   });
   const { data: products, isLoading: productsLoading } = useQuery({
     queryFn: async () => {
@@ -80,7 +81,10 @@ export default function ProductPage() {
                 <div className="flex flex-row items-center justify-between">
                   <div className="flex flex-row items-center gap-2">
                     <RxStarFilled className="text-yellow-500 text-xl" />
-                    <p>{data?.data.rating || 0}</p>
+                    <p>
+                      {data?.data.ratings_average.toFixed(2) || "0.00"} (
+                      {data?.data.ratings_count})
+                    </p>
                   </div>
                   {data?.data.saved ? (
                     <RxHeartFilled

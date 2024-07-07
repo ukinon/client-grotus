@@ -16,6 +16,7 @@ type Props = {
   className?: string;
 };
 export default function MainProductCard({ data, className }: Props) {
+  console.log(data);
   return (
     <Card className={`${className} min-w-[150px] h-full`}>
       <Link
@@ -38,8 +39,8 @@ export default function MainProductCard({ data, className }: Props) {
             </h1>
             <div className="flex flex-row gap-1 items-center text-[0.6rem]">
               <StarFilledIcon className="text-yellow-400" />
-              {data.ratingCount || 0}
-              {data.ratingCount ? `(${data.ratingCount})` : "(0)"}
+              {data.ratings_average?.toFixed(2) || 0}
+              {data.ratings_count ? `(${data.ratings_count})` : "(0)"}
             </div>
           </div>
           <p className="text-[0.7rem] text-zinc-400 line-clamp-1 overflow-hidden">

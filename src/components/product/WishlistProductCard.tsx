@@ -17,7 +17,11 @@ export default function WishlistProductCard({ data }: Props) {
   const { deleteMutation } = useDelete({
     id: data.id as number,
     path: "wishlist",
-    queryKey: ["get-wishlists"],
+    queryKey: [
+      ["get-wishlists"],
+      ["get-products"],
+      ["get-product", data.product.id],
+    ],
   });
   const router = useRouter();
 
