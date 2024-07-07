@@ -38,7 +38,7 @@ export default function MainProductCard({ data, className }: Props) {
             </h1>
             <div className="flex flex-row gap-1 items-center text-[0.6rem]">
               <StarFilledIcon className="text-yellow-400" />
-              {data.rating || 0}
+              {data.ratingCount || 0}
               {data.ratingCount ? `(${data.ratingCount})` : "(0)"}
             </div>
           </div>
