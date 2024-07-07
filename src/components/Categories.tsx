@@ -24,9 +24,9 @@ export default function Categories() {
   });
 
   return (
-    <div className="flex flex-col gap-4 pb-3 pt-6 w-[85%] ">
-      <h1 className="text-2xl font-bold">Jenis Nutrisi</h1>
-      <div className="flex flex-row md:flex-wrap gap-2 items-center justify-start rounded-xl md:py-1 md:px-6 pr-8 overflow-x-auto w-screen">
+    <div className="flex flex-col gap-4 pb-3 pt-6 w-[100%] ">
+      <h1 className="text-2xl font-bold pl-8">Jenis Nutrisi</h1>
+      <div className="flex flex-row md:flex-wrap gap-2 items-center justify-start rounded-xl md:py-1 md:px-6 pr-8 overflow-x-auto w-screen pl-8">
         {nutritionLoading &&
           Array(8)
             .fill(null)
