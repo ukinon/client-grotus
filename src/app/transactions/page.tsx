@@ -3,7 +3,8 @@ import Navbar from "@/components/layout/Navbar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import NextAuth from "@auth-kit/next/NextAuth";
 import UnpaidTransactions from "./UnpaidTransactions";
-import PaidTransactions from "./PaidTransactions";
+import CompleteTransaction from "./CompleteTransactions";
+import ShippedTransactions from "./ShippedTransactions";
 
 export default function TransactionPage() {
   return (
@@ -16,18 +17,27 @@ export default function TransactionPage() {
           className="w-screen flex flex-col items-end"
         >
           <TabsList className="bg-white fixed top-[0] mt-[8dvh] w-screen">
-            <TabsTrigger value="unpaid" className="w-1/2">
-              Belum bayar
+            <TabsTrigger value="unpaid" className="w-1/3">
+              Pending
             </TabsTrigger>
-            <TabsTrigger value="paid" className="w-1/2">
-              Sudah bayar
+            <TabsTrigger value="sent" className="w-1/3">
+              Dikirim
+            </TabsTrigger>
+            <TabsTrigger value="complete" className="w-1/3">
+              Selesai
             </TabsTrigger>
           </TabsList>
-          <TabsContent value="unpaid" className="w-screen">
+          <TabsContent value="unpaid" className="w-screen flex justify-center">
             <UnpaidTransactions />
           </TabsContent>
-          <TabsContent value="paid" className="w-screen">
-            <PaidTransactions />
+          <TabsContent value="sent" className="w-screen flex justify-center">
+            <ShippedTransactions />
+          </TabsContent>
+          <TabsContent
+            value="complete"
+            className="w-screen flex justify-center"
+          >
+            <CompleteTransaction />
           </TabsContent>
         </Tabs>
         <BottomBar />

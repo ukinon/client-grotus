@@ -1,17 +1,19 @@
 "use client";
 
-import { useGetTransactions } from "@/hooks/transaction";
+import {
+  useGetProductTransactions,
+  useGetTransactions,
+} from "@/hooks/transaction";
 import React from "react";
 import TransactionProductCard from "@/components/product/TransactionProductCard";
 import { Product } from "@/types/Product";
-import { Transaction } from "@/types/Transaction";
 import TransactionLoading from "./TransactionLoading";
+import { Transaction } from "@/types/Transaction";
 
-export default function UnpaidTransactions() {
+export default function CompleteTransaction() {
   const { transactionData, transactionLoading } = useGetTransactions(
-    "?perPage=100000&filter[status]=Waiting For Payment"
+    "?perPage=100000&filter[status]=Completed"
   );
-  console.log(transactionData);
 
   return (
     <>

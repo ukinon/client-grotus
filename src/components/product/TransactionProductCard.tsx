@@ -1,20 +1,40 @@
 import Image from "next/image";
 import { RxCaretDown, RxDotsHorizontal, RxStar } from "react-icons/rx";
-import { Transaction } from "@/types/Transaction";
 import { formatToIDR } from "@/lib/formatToIDR";
 import { Product } from "@/types/Product";
 import Link from "next/link";
-import { Button } from "../ui/button";
 import PayButton from "../ui/PayButton";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "../ui/collapsible";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTrigger,
+} from "../ui/drawer";
+import CompleteButton from "../ui/CompleteButton";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../ui/alert-dialog";
+import { Button } from "../ui/button";
+import RatingProductCard from "./RatingProductCard";
+import RateButton from "./RateButton";
 
 type Props = {
   data: Product[];
-  status: string;
+  status: "Waiting For Payment" | "Shipped" | "Completed";
   total: number;
   transactionId: number;
 };
@@ -25,7 +45,6 @@ export default function TransactionProductCard({
   total,
   transactionId,
 }: Props) {
-  console.log(data);
   return (
     <div className="flex justify-between p-3 rounded-lg border-zinc-300 border w-full">
       <div className="flex flex-col gap-3 w-full">
@@ -94,15 +113,21 @@ export default function TransactionProductCard({
         <div className="flex justify-between items-end w-full">
           <div
             className={`flex justify-center items-center  h-6 rounded-full w-24  ${
-              status == "Sudah bayar" && "bg-green-300"
-            } ${status == "Belum bayar" && "bg-red-300"}`}
+              status == "Completed" && "bg-green-300"
+            } ${status == "Shipped" && "bg-yellow-300"} ${
+              status == "Waiting For Payment" && "bg-red-300"
+            }`}
           >
             <p
               className={`text-[0.6rem] ${
-                status == "Sudah bayar" && "text-green-700"
-              } ${status == "Belum bayar" && "text-red-800"}`}
+                status == "Completed" && "text-green-700"
+              } ${status == "Shipped" && "text-yellow-700"} ${
+                status == "Waiting For Payment" && "text-red-800"
+              }`}
             >
-              {status}
+              {(status == "Completed" && "Selesai") ||
+                (status == "Shipped" && "Dikirim") ||
+                (status == "Waiting For Payment" && "Belum bayar")}
             </p>
           </div>
 
@@ -113,20 +138,37 @@ export default function TransactionProductCard({
             </p>
           </div>
         </div>
-
-        {status == "Belum bayar" && <PayButton id={transactionId as number} />}
-        {status == "Sudah bayar" && (
-          <div className="flex flex-row justify-between items-end w-full">
-            <p className=" font-bold  text-xs">Ulasan</p>
-            <div className="flex flex-row gap-1 items-center text-lg">
-              <RxStar className="text-yellow-400" />
-              <RxStar className="text-yellow-400" />
-              <RxStar className="text-yellow-400" />
-              <RxStar className="text-yellow-400" />
-              <RxStar className="text-yellow-400" />
-            </div>
-          </div>
-        )}
+        <div className="self-end w-1/3">
+          {status == "Waiting For Payment" && (
+            <PayButton id={transactionId as number} />
+          )}
+          {status == "Shipped" && (
+            <AlertDialog>
+              <AlertDialogTrigger className="w-full">
+                <Button className=" bg-primary-500 text-white text-xs w-full">
+                  Selesai
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Selesaikan transaksi?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    Anda akan menyelesaikan transaksi ini
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter className="gap-3">
+                  <AlertDialogCancel className="text-white bg-green-500">
+                    Tidak
+                  </AlertDialogCancel>
+                  <AlertDialogAction className="text-primary-500 border-primary-500 border">
+                    <CompleteButton id={transactionId as number} />
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          )}
+          {status == "Completed" && <RateButton data={data} />}
+        </div>
       </div>
     </div>
   );

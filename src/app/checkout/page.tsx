@@ -98,7 +98,7 @@ export default function CheckoutPage() {
           {!userLoading && userData && !userData?.data.profile.address && (
             <div className="flex flex-col gap-2">
               <Button className="bg-primary-500 text-white">
-                <Link href="/profile">+ Tambah alamat</Link>
+                <Link href="/profile/edit">+ Tambah alamat</Link>
               </Button>
               <p className="text-red-500 text-sm">Tambah alamat dulu, ya</p>
             </div>

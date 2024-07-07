@@ -1,9 +1,11 @@
 import {
   addTransactions,
+  completeTransactions,
   getProductTransactions,
   getTransaction,
   getTransactions,
   payTransactions,
+  rateProduct,
 } from "@/apis/transaction";
 import { toast } from "@/components/ui/use-toast";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -136,5 +138,76 @@ export const usePayTransaction = () => {
     payTransactionPending,
     payTransactionError,
     payTransactionSuccess,
+  };
+};
+export const useCompleteTransaction = () => {
+  const queryClient = useQueryClient();
+  const {
+    mutateAsync: completeTransactionMutation,
+    isPending: completeTransactionPending,
+    error: completeTransactionError,
+    isSuccess: completeTransactionSuccess,
+  } = useMutation({
+    mutationFn: async (id: number) => await completeTransactions(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["get-transactions"] });
+      queryClient.invalidateQueries({ queryKey: ["get-product-transactions"] });
+
+      toast({
+        title: "Yay!",
+        description: "Berhasil selesaikan transaksi",
+      });
+    },
+    onError(error) {
+      if (error instanceof AxiosError)
+        toast({
+          title: "Oops!",
+          description: error?.response?.data?.error,
+          variant: "destructive",
+        });
+    },
+  });
+
+  return {
+    completeTransactionMutation,
+    completeTransactionPending,
+    completeTransactionError,
+    completeTransactionSuccess,
+  };
+};
+export const useRateProduct = () => {
+  const queryClient = useQueryClient();
+  const {
+    mutateAsync: rateProductMutation,
+    isPending: rateProductPending,
+    error: rateProductError,
+    isSuccess: rateProductSuccess,
+  } = useMutation({
+    mutationFn: async ({ id, rating }: { id: number; rating: number }) =>
+      await rateProduct({ id, rating }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["get-transactions"] });
+      queryClient.invalidateQueries({ queryKey: ["get-product-transactions"] });
+
+      toast({
+        title: "Yay!",
+        description: "Berhasil ulas produk",
+      });
+    },
+    onError(error) {
+      if (error instanceof AxiosError)
+        toast({
+          title: "Oops!",
+          description: error?.response?.data?.error,
+          variant: "destructive",
+        });
+    },
+  });
+
+  return {
+    rateProductMutation,
+    rateProductPending,
+    rateProductError,
+    rateProductSuccess,
   };
 };

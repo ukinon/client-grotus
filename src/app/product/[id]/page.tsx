@@ -55,6 +55,8 @@ export default function ProductPage() {
     await addToWishlistMutation();
   };
 
+  console.log(data?.data);
+
   return (
     <main className="flex flex-col items-center justify-start overflow-x-hidden md:overflow-x-visible relative">
       <Navbar withBackButton withCart title="Produk" />

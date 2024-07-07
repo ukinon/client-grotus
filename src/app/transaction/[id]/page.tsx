@@ -142,14 +142,15 @@ export default function TransactionPage() {
             <p className="font-bold text-sm">{formatToIDR(total)}</p>
           </div>
         </div>
-
-        <Button
-          className="bg-primary-500 text-white w-[95%] p-5"
-          disabled={!userData?.data.profile.address || payTransactionPending}
-          onClick={handlePay}
-        >
-          Bayar
-        </Button>
+        {transactionData?.data.status === "Waiting For Payment" && (
+          <Button
+            className="bg-primary-500 text-white w-[95%] p-5"
+            disabled={!userData?.data.profile.address || payTransactionPending}
+            onClick={handlePay}
+          >
+            Bayar
+          </Button>
+        )}
       </main>
     </div>
   );

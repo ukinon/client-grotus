@@ -5,7 +5,11 @@ export type Product = {
   variant?: string;
   description?: string;
   photo?: string;
-  rating?: number;
+  rating?: {
+    id: number;
+    user_id: number;
+    rating: number;
+  };
   ratingCount?: number;
   amount?: number;
   loved?: boolean;
