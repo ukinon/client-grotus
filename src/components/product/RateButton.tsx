@@ -58,7 +58,7 @@ export default function RateButton({ data }: { data: Product[] }) {
       <Drawer>
         <DrawerTrigger className="w-full" asChild>
           <Button className=" bg-primary-500 text-white text-xs w-full">
-            Beri ulasan
+            Ulasan
           </Button>
         </DrawerTrigger>
 
