@@ -28,11 +28,11 @@ export default function Categories() {
       <h1 className="text-2xl font-bold pl-8 md:pl-16">Jenis Nutrisi</h1>
       <div className="flex flex-row md:flex-wrap gap-2 items-center justify-start  md:py-1 md:px-6 pr-8 overflow-x-auto w-screen pl-8 md:pl-16">
         {nutritionLoading &&
-          Array(8)
+          Array(14)
             .fill(null)
             .map((_, index) => (
               <Skeleton
-                className="rounded-full px-10 w-24 h-20 bg-zinc-300"
+                className="rounded-full px-10 w-24 h-20 bg-zinc-300 md:w-40"
                 key={index}
               />
             ))}
