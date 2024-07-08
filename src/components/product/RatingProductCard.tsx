@@ -35,10 +35,12 @@ export default function RatingProductCard({ data, onRatingChange }: Props) {
           <button
             key={star}
             onClick={() =>
-              handleStarClick({
-                id: id,
-                rating: star,
-              })
+              !data.rating
+                ? handleStarClick({
+                    id: id,
+                    rating: star,
+                  })
+                : null
             }
             className={`text-2xl ${
               star <= rating.rating ? "text-yellow-400" : "text-gray-300"
