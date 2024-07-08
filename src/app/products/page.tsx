@@ -9,6 +9,8 @@ import React from "react";
 import { BiSort } from "react-icons/bi";
 import { FiFilter } from "react-icons/fi";
 import ProductsLoading from "./ProductsLoading";
+import SortButton from "./SortButton";
+import FilterButton from "./FilterButton";
 
 export default function ProductsPage() {
   const params = useSearchParams();
@@ -24,18 +26,16 @@ export default function ProductsPage() {
         searchPlaceholder={params.get("filter[search]") || "Cari barang..."}
       />
       <div className="flex flex-col gap-5 w-[90%]">
-        <div className="flex flex-row gap-2 w-full justify-end pr-5 fixed left-0 top-0 mt-[8dvh] py-3 bg-white border-none md:px-24">
-          <button
-            className={`bg-zinc-200 text-[0.7rem] rounded-full py-1 px-2`}
-          >
-            <BiSort className="text-base" />
-          </button>
-          <button
-            className={`bg-zinc-200 text-[0.7rem] rounded-full py-1 px-2`}
-          >
-            <FiFilter className="text-base" />
-          </button>
+        <div className="flex justify-between items-center w-full px-10 bg-white pb-2 md:py-2 fixed right-0 md:px-20">
+          <h1 className="text-black font-bold">
+            {params.get("filter[search]") ? "Hasil Pencarian" : "Semua Produk"}
+          </h1>
+          <div className="flex flex-row gap-2">
+            <SortButton />
+            <FilterButton />
+          </div>
         </div>
+
         {productLoading && <ProductsLoading className="mt-12 md:grid-cols-6" />}
         {productData && (
           <>

@@ -185,11 +185,11 @@ export const useRateProduct = () => {
   } = useMutation({
     mutationFn: async ({ id, rating }: { id: number; rating: number }) =>
       await rateProduct({ id, rating }),
-    onSuccess: (id: number) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["get-transactions"] });
       queryClient.invalidateQueries({ queryKey: ["get-product-transactions"] });
       queryClient.invalidateQueries({ queryKey: ["get-products"] });
-      queryClient.invalidateQueries({ queryKey: ["get-product", id] });
+      queryClient.invalidateQueries({ queryKey: ["get-product"] });
 
       toast({
         title: "Yay!",

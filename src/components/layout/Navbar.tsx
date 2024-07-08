@@ -114,7 +114,7 @@ export default function Navbar({
 
       {/**for desktop */}
       <div
-        className={`w-screen md:flex flex-row p-5 h-[8dvh] fixed top-0 items-center justify-between z-50 hidden px-24 gap-5  ${
+        className={`w-screen md:flex flex-row p-5 h-[8dvh] fixed top-0 items-center justify-between z-50 hidden px-20 gap-5  ${
           bgColor ? bgColor : "bg-white"
         }`}
       >

@@ -9,18 +9,19 @@ import {
   DrawerTrigger,
 } from "../ui/drawer";
 import { Button } from "../ui/button";
-import { Product } from "@/types/Product";
 import RatingProductCard from "./RatingProductCard";
 import { useRateProduct } from "@/hooks/transaction";
+import { Product } from "@/types/Product";
 
 export default function RateButton({ data }: { data: Product[] }) {
+  console.log(data[0]);
   const [rating, setRating] = React.useState([
     {
       id: 0,
       rating: 0,
     },
   ]);
-
+  console.log(data);
   const { rateProductMutation, rateProductPending } = useRateProduct();
 
   const handleRatingChange = (newRating: { id: number; rating: number }) => {
@@ -48,7 +49,10 @@ export default function RateButton({ data }: { data: Product[] }) {
     rating.forEach((r) => {
       const item = data.find((item) => item.id === r.id);
       if (item && item.rating === null && r.id !== 0 && r.rating !== 0) {
-        rateProductMutation({ id: r.id, rating: r.rating });
+        rateProductMutation({
+          id: r.id,
+          rating: r.rating,
+        });
       }
     });
   };

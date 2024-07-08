@@ -31,7 +31,7 @@ export default function CompleteTransaction() {
           )}
           {transactionData && transactionData.data.data.length > 0 && (
             <>
-              <div className="flex flex-col mt-12 w-full md:w-[60vw] items-center gap-2 px-3 mb-5">
+              <div className="flex flex-col mt-8 w-full md:w-[60vw] items-center gap-2 px-3 mb-5">
                 {transactionData.data.data.map(
                   (
                     item: Transaction & {
