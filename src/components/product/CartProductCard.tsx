@@ -9,6 +9,7 @@ import { useMemo, useState } from "react";
 import { useAddToCart } from "@/hooks/product";
 import { debounce } from "lodash";
 import Link from "next/link";
+import { useUpdateCart } from "@/hooks/cart";
 
 type Props = {
   data: Cart;
@@ -21,9 +22,9 @@ export default function CartProductCard({ data }: Props) {
     path: "cart",
     queryKey: [["get-carts"]],
   });
-  const { addToCartMutation } = useAddToCart({
-    id: data.product.id as number,
-    amount: amount - data.amount,
+  const { updateCartMutation } = useUpdateCart({
+    id: data.id as number,
+    amount: amount,
   });
 
   const handleDelete = async () => {
@@ -33,7 +34,7 @@ export default function CartProductCard({ data }: Props) {
   const handleUpdateItem = useMemo(
     () =>
       debounce(async () => {
-        await addToCartMutation();
+        await updateCartMutation();
       }, 500),
     [data]
   );
