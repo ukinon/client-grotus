@@ -7,15 +7,11 @@ import Link from "next/link";
 
 // Define an array of gradient background colors
 const backgroundGradients = [
-  "bg-gradient-to-br from-red-300 to-pink-200",
-  "bg-gradient-to-br from-blue-300 to-purple-200",
-  "bg-gradient-to-br from-green-300 to-teal-200",
-  "bg-gradient-to-br from-yellow-300 to-orange-200",
-  "bg-gradient-to-br from-indigo-300 to-blue-200",
-  "bg-gradient-to-br from-pink-300 to-purple-200",
-  "bg-gradient-to-br from-teal-300 to-green-200",
-  "bg-gradient-to-br from-orange-300 to-red-200",
-  // Add more gradients as needed
+  "bg-gradient-to-br from-primary-300 to-secondary-200",
+  "bg-gradient-to-br from-secondary-300 to-primary-200",
+  "bg-gradient-to-br from-primary-300 to-secondary-300",
+  "bg-gradient-to-br from-secondary-400 to-primary-200",
+  "bg-gradient-to-br from-primary-400 to-secondary-200",
 ];
 
 export default function Categories() {

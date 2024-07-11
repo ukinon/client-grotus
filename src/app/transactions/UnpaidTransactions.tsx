@@ -16,7 +16,7 @@ export default function UnpaidTransactions() {
   return (
     <div className="w-screen flex justify-center">
       {transactionLoading && (
-        <div className="flex flex-col mt-12 w-full items-center gap-2">
+        <div className="flex flex-col mt-8 w-full md:w-[60vw] items-center gap-2 px-3 mb-5">
           <TransactionLoading />
         </div>
       )}
