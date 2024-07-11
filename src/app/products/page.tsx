@@ -42,9 +42,13 @@ export default function ProductsPage() {
       <div className="flex flex-col gap-5 w-[90%]">
         <div className="flex justify-between items-center w-full px-5 pl-7 bg-white pb-2 md:py-2 fixed right-0 md:px-20">
           <h1 className="text-black font-bold">
-            {(params.get("filter[search]") && "Hasil Pencarian") ||
+            {(params.get("filter[search]") &&
+              !shouldUseSmartSearch &&
+              "Hasil Pencarian") ||
               params.get("filter[nutrition]") ||
-              "Semua Produk"}
+              (params.get("filter[search]") &&
+                shouldUseSmartSearch &&
+                "Smart Search")}
           </h1>
           <div className="flex flex-row gap-4">
             <SortButton />
