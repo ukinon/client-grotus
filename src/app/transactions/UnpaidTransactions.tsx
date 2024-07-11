@@ -14,7 +14,7 @@ export default function UnpaidTransactions() {
   console.log(transactionData);
 
   return (
-    <>
+    <div className="w-screen flex justify-center">
       {transactionLoading && (
         <div className="flex flex-col mt-12 w-full items-center gap-2">
           <TransactionLoading />
@@ -58,6 +58,6 @@ export default function UnpaidTransactions() {
           )}
         </>
       )}
-    </>
+    </div>
   );
 }

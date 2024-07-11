@@ -140,7 +140,7 @@ export default function ProductPage() {
                     <ProductsLoading className="mt-0 md:grid-cols-3 z-10" />
                   )}
                   {products && (
-                    <div className="grid grid-cols-2 gap-2 md:grid-cols-3 2xl:grid-cols-5">
+                    <div className="grid grid-cols-2 gap-2 md:gap-4 md:grid-cols-3 2xl:grid-cols-5 ">
                       {products?.map((item: Product, index: number) => (
                         <MainProductCard
                           key={index}

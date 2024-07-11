@@ -16,7 +16,7 @@ export default function CompleteTransaction() {
   );
 
   return (
-    <>
+    <div className="w-screeen flex justify-center">
       {transactionLoading && (
         <div className="flex flex-col mt-12 w-full items-center gap-2">
           <TransactionLoading />
@@ -60,6 +60,6 @@ export default function CompleteTransaction() {
           )}
         </>
       )}
-    </>
+    </div>
   );
 }

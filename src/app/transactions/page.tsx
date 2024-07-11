@@ -27,16 +27,13 @@ export default function TransactionPage() {
               Selesai
             </TabsTrigger>
           </TabsList>
-          <TabsContent value="unpaid" className="w-screen flex justify-center">
+          <TabsContent value="unpaid" className="w-screen ">
             <UnpaidTransactions />
           </TabsContent>
-          <TabsContent value="sent" className="w-screen flex justify-center">
+          <TabsContent value="sent" className="w-screen ">
             <ShippedTransactions />
           </TabsContent>
-          <TabsContent
-            value="complete"
-            className="w-screen flex justify-center"
-          >
+          <TabsContent value="complete" className="w-screen ">
             <CompleteTransaction />
           </TabsContent>
         </Tabs>

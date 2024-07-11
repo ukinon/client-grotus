@@ -20,7 +20,7 @@ export default function ShippedTransactions() {
         </div>
       )}
       {transactionData && (
-        <>
+        <div className="w-screen flex justify-center">
           {transactionData.data.data.length <= 0 && (
             <div className="flex justify-center items-center h-[78dvh] w-screen">
               <p>Tidak ada transaksi.</p>
@@ -55,7 +55,7 @@ export default function ShippedTransactions() {
               </div>
             </>
           )}
-        </>
+        </div>
       )}
     </>
   );

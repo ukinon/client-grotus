@@ -10,7 +10,7 @@ export default function TransactionLoading() {
         .fill(null)
         .map((_, index: number) => (
           <Skeleton
-            className="w-[95vw] h-[14dvh] bg-zinc-300 md:w-[85vw] md:h-[28dvh]"
+            className="w-[95vw] h-[16dvh] bg-zinc-300 md:w-[60vw] md:h-[20vh]"
             key={index}
           />
         ))}
