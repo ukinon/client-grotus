@@ -41,7 +41,7 @@ export default function Categories() {
               } hover:shadow-lg transition-shadow duration-300`}
               key={index}
             >
-              <p className="text-[0.6rem] md:text-xs px-2 text-neutral-800 font-semibold">
+              <p className="text-[0.6rem] md:text-xs px-2 text-black font-bold">
                 {item.name}
               </p>
             </Link>
