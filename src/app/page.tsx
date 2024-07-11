@@ -12,7 +12,7 @@ export default function Home() {
       <Navbar isHome withSearchButton searchPlaceholder="Cari barang..." />
 
       <CarouselComponent />
-      <div className="bg-white rounded-t-3xl flex flex-col gap-2 items-start -mt-6 z-30 h-full pb-24 w-full md:mt-0 relative md:pt-12">
+      <div className="bg-white rounded-t-3xl flex flex-col gap-2 items-start -mt-6 z-30 h-full  w-full md:mt-0 relative md:pt-12">
         <div className="w-full flex justify-center overflow-x-hidden">
           <Categories />
         </div>

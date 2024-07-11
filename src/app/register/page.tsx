@@ -16,7 +16,7 @@ export default function RegisterPage() {
         <div className="flex flex-col gap-2 items-center">
           <h1 className="font-bold text-lg">Buat Akun</h1>
           <p className="text-sm">
-            Buat akun mu untuk menjelajahi{" "}
+            Buat akunmu untuk menjelajahi{" "}
             <span className="text-primary-500">Grotus</span> !
           </p>
         </div>

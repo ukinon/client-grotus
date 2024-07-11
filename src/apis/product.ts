@@ -1,10 +1,13 @@
-import { axiosInstance } from "@/lib/axios";
+import { axiosInstance, axiosInstanceML } from "@/lib/axios";
 
 export async function getProducts(query: string) {
   const response = await axiosInstance.get(`/products${query}`);
   return response.data;
 }
-
+export async function getSmartSearch(query: string) {
+  const response = await axiosInstanceML.get(`/search${query}`);
+  return response.data;
+}
 export async function getProduct(id: number) {
   const response = await axiosInstance.get(`/products/${id}`);
   return response.data;

@@ -13,7 +13,7 @@ export default function CheckoutBar({
   loading?: boolean;
 }) {
   return (
-    <div className="w-screen flex flex-row h-[11dvh] p-5 pb-8 fixed bottom-0  items-center justify-between border-t-2 border-zinc-300 bg-white  md:top-24 md:right-12   md:w-[30%] md:border md:border-primary-500 md:rounded-xl md:flex-col md:gap-12 md:h-fit md:items-start">
+    <div className="w-screen flex flex-row h-[11dvh] p-5 pb-8 fixed bottom-0 left-0  items-center justify-between border-t-2 border-zinc-300 bg-white  md:top-24 md:right-12   md:w-[30%] md:border md:border-primary-500 md:rounded-xl md:flex-col md:gap-12 md:h-fit md:items-start">
       <div className="flex flex-col gap-2">
         {loading && (
           <>

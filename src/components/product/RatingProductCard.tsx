@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { formatToIDR } from "@/lib/formatToIDR";
 import { Product } from "@/types/Product";
+import Link from "next/link";
 
 type Props = {
   data: Product;
@@ -55,7 +56,10 @@ export default function RatingProductCard({ data, onRatingChange }: Props) {
 
   return (
     <div className="flex justify-between p-3 rounded-lg w-full">
-      <div className="flex flex-row gap-3 w-full">
+      <Link
+        href={`product/${data.product_id}`}
+        className="flex flex-row gap-3 w-full"
+      >
         <Image
           src={(data.photo as string) || "https://via.placeholder.com/150"}
           width={50}
@@ -71,7 +75,7 @@ export default function RatingProductCard({ data, onRatingChange }: Props) {
             {formatToIDR(data.price as number)}
           </p>
         </div>
-      </div>
+      </Link>
       {renderStarRating(data.id as number)}
     </div>
   );

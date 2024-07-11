@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { formatToIDR } from "@/lib/formatToIDR";
 import { Cart } from "@/types/Cart";
+import Link from "next/link";
 
 type Props = {
   data: Cart;
@@ -9,7 +10,10 @@ type Props = {
 export default function CheckoutProductDetail({ data }: Props) {
   return (
     <div className="flex justify-between p-3 rounded-lg border-zinc-300 w-full">
-      <div className="flex flex-row gap-3 w-full">
+      <Link
+        href={`/product/${data.product.id}`}
+        className="flex flex-row gap-3 w-full"
+      >
         <Image
           src={
             (data?.product?.photo as string) ||
@@ -31,7 +35,7 @@ export default function CheckoutProductDetail({ data }: Props) {
             {formatToIDR(data?.product.price as number)}
           </p>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }

@@ -60,28 +60,28 @@ export default function RegisterForm() {
         <FormInput
           form={form}
           icon={<RxPerson />}
-          placeholder="Masukkan nama mu..."
+          placeholder="Masukkan nama..."
           name="name"
         />
         <FormInput
           form={form}
           type="email"
           icon={<RxEnvelopeClosed />}
-          placeholder="Masukkan email mu..."
+          placeholder="Masukkan email..."
           name="email"
         />
         <FormInput
           form={form}
           type="password"
           icon={<RxLockClosed />}
-          placeholder="Masukkan password mu..."
+          placeholder="Masukkan password..."
           name="password"
         />{" "}
         <FormInput
           form={form}
           type="password"
           icon={<RxLockClosed />}
-          placeholder="Konfirmasi password mu..."
+          placeholder="Konfirmasi password..."
           name="password_confirmation"
         />
         <Button

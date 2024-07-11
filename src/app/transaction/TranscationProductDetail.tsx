@@ -1,15 +1,20 @@
 import Image from "next/image";
 import { formatToIDR } from "@/lib/formatToIDR";
 import { TransactionProduct } from "@/types/Transaction";
+import Link from "next/link";
 
 type Props = {
   data: TransactionProduct;
 };
 
 export default function TransactionProductDetail({ data }: Props) {
+  console.log(data);
   return (
     <div className="flex justify-between p-3 rounded-lg border-zinc-300 w-full">
-      <div className="flex flex-row gap-3 w-full">
+      <Link
+        href={`/product/${data.product_id}`}
+        className="flex flex-row gap-3 w-full"
+      >
         <Image
           src={(data?.photo as string) || "https://via.placeholder.com/150"}
           width={50}
@@ -26,7 +31,7 @@ export default function TransactionProductDetail({ data }: Props) {
             {formatToIDR(data?.price as number)}
           </p>
         </div>
-      </div>
+      </Link>
     </div>
   );
 }

@@ -2,21 +2,35 @@
 
 import Navbar from "@/components/layout/Navbar";
 import MainProductCard from "@/components/product/MainProductCard";
-import { useGetProducts } from "@/hooks/product";
+import { useGetProducts, useGetSmartSearch } from "@/hooks/product";
 import { Product } from "@/types/Product";
 import { useSearchParams } from "next/navigation";
-import React from "react";
-import { BiSort } from "react-icons/bi";
-import { FiFilter } from "react-icons/fi";
+import React, { useEffect, useState } from "react";
 import ProductsLoading from "./ProductsLoading";
 import SortButton from "./SortButton";
 import FilterButton from "./FilterButton";
 
 export default function ProductsPage() {
   const params = useSearchParams();
+  const searchText = params.get("filter[search]");
+  const [shouldUseSmartSearch, setShouldUseSmartSearch] = useState(false);
+
   const { productData, productLoading } = useGetProducts(
     `?${params.toString()}`
   );
+  const { searchData, searchLoading } = useGetSmartSearch(
+    `?${params.toString()}`
+  );
+
+  useEffect(() => {
+    if (searchText && productData) {
+      const isSearchTextInProductNames = productData.data.data.some(
+        (product: Product) =>
+          product?.name?.toLowerCase().includes(searchText.toLowerCase())
+      );
+      setShouldUseSmartSearch(!isSearchTextInProductNames);
+    }
+  }, [searchText, productData]);
 
   return (
     <main className="flex flex-col items-center justify-start">
@@ -38,23 +52,35 @@ export default function ProductsPage() {
           </div>
         </div>
 
-        {productLoading && <ProductsLoading className="mt-12 md:grid-cols-6" />}
-        {productData && (
+        {(productLoading || searchLoading) && (
+          <ProductsLoading className="mt-12 md:grid-cols-6" />
+        )}
+        {(shouldUseSmartSearch ? productData : searchData) && (
           <>
-            {productData.data.data.length <= 0 && (
-              <div className="flex h-[70dvh] items-center justify-center">
-                Produk tidak ditemukan.
-              </div>
-            )}
+            {productData?.data.data.length <= 0 &&
+              searchData?.products.length <= 0 && (
+                <div className="flex h-[70dvh] items-center justify-center">
+                  Produk tidak ditemukan.
+                </div>
+              )}
 
             <div className="grid grid-cols-2 md:grid-cols-6  gap-2 justify-center mt-12 md:gap-5">
-              {productData?.data.data.map((product: Product) => (
-                <MainProductCard
-                  data={product}
-                  key={product.id}
-                  className="col-span-1"
-                />
-              ))}
+              {!shouldUseSmartSearch &&
+                productData?.data.data.map((product: Product) => (
+                  <MainProductCard
+                    data={product}
+                    key={product.id}
+                    className="col-span-1"
+                  />
+                ))}
+              {shouldUseSmartSearch &&
+                searchData?.products.map((product: Product) => (
+                  <MainProductCard
+                    data={product}
+                    key={product.id}
+                    className="col-span-1"
+                  />
+                ))}
             </div>
           </>
         )}

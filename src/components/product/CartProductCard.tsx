@@ -5,34 +5,55 @@ import { formatToIDR } from "@/lib/formatToIDR";
 import { FiTrash } from "react-icons/fi";
 import { Cart } from "@/types/Cart";
 import { useDelete } from "@/hooks/delete";
+import { useMemo, useState } from "react";
+import { useAddToCart } from "@/hooks/product";
+import { debounce } from "lodash";
+import Link from "next/link";
 
 type Props = {
   data: Cart;
 };
 
 export default function CartProductCard({ data }: Props) {
+  const [amount, setAmount] = useState(data.amount as number);
   const { deleteMutation } = useDelete({
     id: data.id as number,
     path: "cart",
     queryKey: [["get-carts"]],
+  });
+  const { addToCartMutation } = useAddToCart({
+    id: data.product.id as number,
+    amount: amount - data.amount,
   });
 
   const handleDelete = async () => {
     await deleteMutation();
   };
 
+  const handleUpdateItem = useMemo(
+    () =>
+      debounce(async () => {
+        await addToCartMutation();
+      }, 500),
+    [data]
+  );
+
   return (
     <div className="flex justify-between p-3 rounded-lg border-zinc-300 border w-full">
       <div className="flex flex-row gap-3 w-full">
-        <Image
-          src={
-            (data.product.photo as string) || "https://via.placeholder.com/150"
-          }
-          width={150}
-          height={150}
-          alt="product image"
-          className="h-full rounded-lg"
-        />
+        <Link href={`product/${data.product.id}`}>
+          <Image
+            src={
+              (data.product.photo as string) ||
+              "https://via.placeholder.com/150"
+            }
+            width={150}
+            height={150}
+            alt="product image"
+            className="h-full rounded-lg"
+          />
+        </Link>
+
         <div className="flex flex-col gap-2 w-full">
           <div className="flex justify-between">
             <h1 className="font-bold text-sm line-clamp-1">
@@ -48,14 +69,36 @@ export default function CartProductCard({ data }: Props) {
             <p className="text-[0.7rem] text-zinc-400 line-clamp-2 overflow-hidden  h-8 w-1/2">
               {data.product.description}{" "}
             </p>
-            <div className="flex flex-row justify-center w-1/3 px-2 items-center border-primary-500 border rounded-full">
-              <button className="text-lg p-1">-</button>
+            <div className="flex flex-row justify-center w-2/5 px-2 items-center border-primary-500 border rounded-full">
+              <button
+                onClick={() => {
+                  if (amount > 1) setAmount(amount - 1);
+                  handleUpdateItem();
+                }}
+                className="text-lg w-1/6 p-1"
+              >
+                -
+              </button>
               <Input
                 type="number"
-                defaultValue={data.amount as number}
-                className="w-10 h-5 text-center border-0 shadow-none text-[0.7rem] "
+                defaultValue={amount}
+                onChange={(e) => {
+                  setAmount(parseInt(e.target.value));
+                  handleUpdateItem();
+                }}
+                value={amount}
+                min={1}
+                className="w-4/6 h-5 text-center border-0 shadow-none text-[0.7rem] "
               />
-              <button className="text-lg p-1">+</button>
+              <button
+                onClick={() => {
+                  setAmount(amount + 1);
+                  handleUpdateItem();
+                }}
+                className="text-lg w-1/6 p-1"
+              >
+                +
+              </button>
             </div>
           </div>
         </div>

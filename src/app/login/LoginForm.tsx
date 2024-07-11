@@ -53,14 +53,14 @@ export default function LoginForm() {
           form={form}
           type="email"
           icon={<RxEnvelopeClosed />}
-          placeholder="Masukkan email mu..."
+          placeholder="Masukkan email..."
           name="email"
         />
         <FormInput
           form={form}
           type="password"
           icon={<RxLockClosed />}
-          placeholder="Masukkan password mu..."
+          placeholder="Masukkan password..."
           name="password"
         />{" "}
         <Button

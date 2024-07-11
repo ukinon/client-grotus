@@ -3,6 +3,7 @@ import {
   addProductToWishlist,
   getProduct,
   getProducts,
+  getSmartSearch,
 } from "@/apis/product";
 import { toast } from "@/components/ui/use-toast";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -26,6 +27,27 @@ export const useGetProducts = (query: string) => {
     productError,
     productErrorData,
     refetchProduct,
+  };
+};
+export const useGetSmartSearch = (query: string) => {
+  const {
+    data: searchData,
+    isLoading: searchLoading,
+    isError: searchError,
+    error: searchErrorData,
+    refetch: refetchSearch,
+  } = useQuery({
+    queryFn: async () => await getSmartSearch(query),
+    staleTime: Infinity,
+    queryKey: ["get-search", query],
+  });
+
+  return {
+    searchData,
+    searchLoading,
+    searchError,
+    searchErrorData,
+    refetchSearch,
   };
 };
 export const useGetProduct = (id: number) => {
@@ -74,13 +96,13 @@ export const useAddToCart = ({
       queryClient.invalidateQueries({ queryKey: ["get-carts"] });
       toast({
         title: "Yay!",
-        description: "Berhasil tambah ke keranjang",
+        description: "Berhasil update ke keranjang",
       });
     },
     onError: () => {
       toast({
         title: "Oops!",
-        description: "Gagal tambah ke keranjang",
+        description: "Gagal update ke keranjang",
         variant: "destructive",
       });
     },
