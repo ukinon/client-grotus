@@ -59,14 +59,15 @@ export default function ProductsPage() {
         {(productLoading || searchLoading) && (
           <ProductsLoading className="mt-12 md:grid-cols-6" />
         )}
-        {(shouldUseSmartSearch ? productData : searchData) && (
+        {(!shouldUseSmartSearch ? productData : searchData) && (
           <>
-            {productData?.data.data.length <= 0 &&
-              searchData?.products.length <= 0 && (
-                <div className="flex h-[70dvh] items-center justify-center">
-                  Produk tidak ditemukan.
-                </div>
-              )}
+            {!shouldUseSmartSearch
+              ? productData?.data.data.length <= 0
+              : searchData?.products.length <= 0 && (
+                  <div className="flex h-[70dvh] items-center justify-center">
+                    Produk tidak ditemukan.
+                  </div>
+                )}
 
             <div className="grid grid-cols-2 md:grid-cols-6  gap-2 justify-center mt-12 md:gap-5">
               {!shouldUseSmartSearch &&
