@@ -76,7 +76,7 @@ export default function Navbar({
           {title && <p className="font-bold text-lg">{title}</p>}
           {withSearchButton && (
             <Link
-              className="w-full border border-zinc-400 rounded-full p-1.5 text-zinc-400 text-sm pl-3 line-clamp-1"
+              className="w-full border border-zinc-400 rounded-full p-1.5 text-zinc-400 text-sm pl-3 line-clamp-1 search"
               href="/search"
             >
               {searchPlaceholder}

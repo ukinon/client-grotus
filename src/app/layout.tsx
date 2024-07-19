@@ -19,19 +19,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Providers>
-      <html lang="id-ID">
-        <head>
-          <link rel="manifest" href="/manifest.json" />
-          <link rel="icon" href="/icon-192x192.png" sizes="192x192" />
-        </head>
+    <html lang="id-ID">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/icon-192x192.png" sizes="192x192" />
+      </head>
+      <Providers>
         <body className={poppins.className}>
           <Suspense fallback={<LoadingPage />}>
             <div className="mt-[8dvh] mb-[11dvh]">{children}</div>
           </Suspense>
           <Toaster />
         </body>
-      </html>
-    </Providers>
+      </Providers>
+    </html>
   );
 }

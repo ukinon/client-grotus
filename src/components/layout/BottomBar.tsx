@@ -31,7 +31,7 @@ export default function BottomBar() {
           <p className="text-xs">Wishlist</p>
         </div>
       </Link>
-      <Link className="w-1/6" href="/predict">
+      <Link className="w-1/6 scan" href="/predict">
         <div className="flex flex-col gap-1 justify-center items-center">
           <BiScan className="text-6xl text-white bg-primary-700 rounded-full p-3" />
         </div>
