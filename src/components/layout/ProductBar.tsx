@@ -5,6 +5,8 @@ import { Button } from "../ui/button";
 import React, { useState } from "react";
 import { Input } from "../ui/input";
 import { useAddToCart } from "@/hooks/product";
+import { useGetCurrentUser } from "@/hooks/auth";
+import Link from "next/link";
 
 export default function ProductBar({ id }: { id: number }) {
   const [amount, setAmount] = useState(1);
@@ -12,6 +14,7 @@ export default function ProductBar({ id }: { id: number }) {
     id: id,
     amount: amount,
   });
+  const { userData } = useGetCurrentUser();
 
   const handleAddToCart = async () => {
     await addToCartMutation();
@@ -43,12 +46,21 @@ export default function ProductBar({ id }: { id: number }) {
           +
         </Button>
       </div>
-      <Button
-        onClick={() => handleAddToCart()}
-        className="bg-primary-500 text-base text-white w-full p-6 rounded-full"
-      >
-        Tambah ke Keranjang
-      </Button>
+      {userData ? (
+        <Button
+          onClick={() => handleAddToCart()}
+          className="bg-primary-500 text-base text-white w-full p-6 rounded-full"
+        >
+          Tambah ke Keranjang
+        </Button>
+      ) : (
+        <Link
+          href={"/login"}
+          className="bg-primary-500 text-base text-center text-white w-full px-6 py-2.5 rounded-full"
+        >
+          Tambah ke Keranjang
+        </Link>
+      )}
     </div>
   );
 }
