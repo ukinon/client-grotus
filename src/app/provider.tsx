@@ -5,6 +5,7 @@ import createStore from "react-auth-kit/createStore";
 import AuthProvider from "react-auth-kit/AuthProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
+import { CallBackProps } from "react-joyride";
 
 const Joyride = dynamic(() => import("react-joyride"), { ssr: false });
 
@@ -31,11 +32,11 @@ const useJoyride = () => {
   useEffect(() => {
     const tourCompleted = localStorage.getItem("tourCompleted");
     if (!tourCompleted) {
-      setTimeout(() => setRunJoyride(true), 500);
+      setRunJoyride(true);
     }
   }, []);
 
-  const handleJoyrideCallback = (data: any) => {
+  const handleJoyrideCallback = (data: CallBackProps) => {
     const { status } = data;
     if (status === "finished" || status === "skipped") {
       setRunJoyride(false);
@@ -43,7 +44,7 @@ const useJoyride = () => {
     }
   };
 
-  return { runJoyride, handleJoyrideCallback, store };
+  return { runJoyride, handleJoyrideCallback };
 };
 
 const isBrowser = typeof window !== "undefined";
@@ -56,11 +57,11 @@ const store = createStore({
 });
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
-  const { runJoyride, handleJoyrideCallback, store } = useJoyride();
+  const { runJoyride, handleJoyrideCallback } = useJoyride();
 
   return (
     <AuthProvider store={store}>
-      {typeof window !== "undefined" && (
+      {isBrowser && (
         <Joyride
           steps={steps}
           run={runJoyride}
