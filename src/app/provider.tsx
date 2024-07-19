@@ -15,11 +15,13 @@ const steps = [
     target: ".search",
     content:
       "Cari produk yang kamu inginkan disini. Kamu bisa menggunakan nama produk atau keluhan yang kamu alami",
+    disableBeacon: true,
   },
   {
     target: ".scan",
     content:
       "Kamu bisa menggunakan fitur scan untuk mengetahui kekurangan nutrisi pada seladamu.",
+    disableBeacon: true,
   },
 ];
 
@@ -27,8 +29,6 @@ const useJoyride = () => {
   const [runJoyride, setRunJoyride] = useState(false);
 
   useEffect(() => {
-    const isBrowser = typeof window !== "undefined";
-
     const tourCompleted = localStorage.getItem("tourCompleted");
     if (!tourCompleted) {
       setTimeout(() => setRunJoyride(true), 500);
@@ -43,7 +43,7 @@ const useJoyride = () => {
     }
   };
 
-  return { runJoyride, handleJoyrideCallback };
+  return { runJoyride, handleJoyrideCallback, store };
 };
 
 const isBrowser = typeof window !== "undefined";
@@ -56,7 +56,7 @@ const store = createStore({
 });
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
-  const { runJoyride, handleJoyrideCallback } = useJoyride();
+  const { runJoyride, handleJoyrideCallback, store } = useJoyride();
 
   return (
     <AuthProvider store={store}>
