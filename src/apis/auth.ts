@@ -8,7 +8,6 @@ export const login = async (data: Login) => {
 };
 
 export async function register(data: UserData) {
-  console.log(data);
   const response = await axiosInstance.post("/auth/register", data);
   return response;
 }

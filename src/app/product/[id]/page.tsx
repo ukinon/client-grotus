@@ -32,7 +32,6 @@ export default function ProductPage() {
   const { addToWishlistMutation } = useAddToWishlist({
     id: data?.data.id,
   });
-  console.log(data);
   const { deleteMutation } = useDelete({
     id: data?.data.saved as number,
     path: "wishlist",
@@ -55,8 +54,6 @@ export default function ProductPage() {
   const handleAddToWishlist = async () => {
     await addToWishlistMutation();
   };
-
-  console.log(data?.data);
 
   return (
     <main className="flex flex-col items-center justify-start overflow-x-hidden md:overflow-x-visible relative">

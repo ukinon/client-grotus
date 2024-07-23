@@ -8,7 +8,6 @@ type Props = {
 };
 
 export default function TransactionProductDetail({ data }: Props) {
-  console.log(data);
   return (
     <div className="flex justify-between p-3 rounded-lg border-zinc-300 w-full">
       <Link

@@ -11,7 +11,6 @@ export default function UnpaidTransactions() {
   const { transactionData, transactionLoading } = useGetTransactions(
     "?perPage=100000&filter[status]=Waiting For Payment"
   );
-  console.log(transactionData);
 
   return (
     <div className="w-screen flex justify-center">

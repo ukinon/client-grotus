@@ -34,16 +34,11 @@ export default function ProfileForm({ data }: { data: UserData }) {
       phone: data.profile?.phone,
     },
   });
-  console.log(data);
   const { updateProfileMutation, updateProfilePending } = useUpdateProfile();
   const [currentImage, setCurrentImage] = useState<FileUpload>({
     profile_photo: null,
   });
   const handleRegister = (value: z.infer<typeof profileFormSchema>) => {
-    console.log({
-      ...value,
-      profile_photo: currentImage.profile_photo,
-    });
     updateProfileMutation({
       id: data?.id as number,
       data: {

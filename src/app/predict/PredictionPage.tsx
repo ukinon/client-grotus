@@ -13,7 +13,6 @@ type Props = {
 };
 
 export default function PredictionPage({ data, photo }: Props) {
-  console.log(data);
   return (
     <div className="flex flex-col gap-12 items-center justify-center w-screen">
       <Navbar withBackButton withCart={false} title="Prediksi" />

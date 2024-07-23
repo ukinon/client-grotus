@@ -10,13 +10,10 @@ type Props = {
 };
 
 export default function RatingProductCard({ data, onRatingChange }: Props) {
-  console.log(data);
   const [rating, setRating] = useState({
     id: data.id as number,
     rating: data.rating?.rating || 0,
   });
-
-  console.log(rating);
 
   const handleStarClick = (selectedRating: { id: number; rating: number }) => {
     setRating((prev) => ({

@@ -43,8 +43,6 @@ export default function Page() {
     };
   }, [updateSearchQuery]);
 
-  console.log(params.get("search"));
-
   return (
     <div className="flex flex-col">
       <div className="w-screen flex flex-row p-5 h-[8dvh] fixed top-0 items-center justify-between z-50">

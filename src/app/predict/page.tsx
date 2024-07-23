@@ -41,9 +41,6 @@ const PredictPage: React.FC = () => {
 
       return response.data;
     },
-    onSuccess: (data) => {
-      console.log(data);
-    },
     onError: (error) => {
       console.error("Error uploading the file:", error);
     },
