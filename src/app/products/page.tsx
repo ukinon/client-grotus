@@ -21,6 +21,7 @@ export default function ProductsPage() {
   const { searchData, searchLoading } = useGetSmartSearch(
     `?${params.toString()}`
   );
+  console.log(searchData);
 
   useEffect(() => {
     if (searchText && productData) {
@@ -56,7 +57,7 @@ export default function ProductsPage() {
           </div>
         </div>
 
-        {(productLoading || searchLoading) && (
+        {productLoading && searchLoading && (
           <ProductsLoading className="mt-12 md:grid-cols-6" />
         )}
         {(!shouldUseSmartSearch ? productData : searchData) && (

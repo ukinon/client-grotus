@@ -35,7 +35,6 @@ export default function Profile({ data }: Props) {
       await axiosInstance.post("/auth/logout");
       router.push("/login");
     } catch (error) {
-      console.log(error);
     } finally {
       setLogoutPending(false);
     }

@@ -8,6 +8,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { BiSort } from "react-icons/bi";
+import CategoriesSort from "./CategoriesSort";
 
 export default function SortButton() {
   return (
@@ -22,12 +23,7 @@ export default function SortButton() {
         <DrawerHeader>
           <DrawerTitle className="text-xl font-bold">Urutkan</DrawerTitle>
         </DrawerHeader>
-
-        <DrawerFooter className="w-full">
-          <Button className="bg-primary-500 text-white text-xs w-full">
-            Terapkan
-          </Button>
-        </DrawerFooter>
+        <CategoriesSort />
       </DrawerContent>
     </Drawer>
   );

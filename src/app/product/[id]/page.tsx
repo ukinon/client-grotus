@@ -55,6 +55,8 @@ export default function ProductPage() {
     await addToWishlistMutation();
   };
 
+  console.log(data);
+
   return (
     <main className="flex flex-col items-center justify-start overflow-x-hidden md:overflow-x-visible relative">
       <Navbar withBackButton withCart title="Produk" />
@@ -64,7 +66,7 @@ export default function ProductPage() {
         <div className="w-[90%] flex flex-col md:flex-row md:gap-12">
           <div className="md:w-1/2 lg:w-2/5 md:sticky top-12 md:self-start">
             <div className="flex flex-col gap-2">
-              <ProductCarousel />
+              <ProductCarousel photos={data?.data.photos} />
               <ProductBar id={data?.data.id} />
             </div>
           </div>

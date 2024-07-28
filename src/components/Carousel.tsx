@@ -20,9 +20,7 @@ export function CarouselComponent() {
 
   const imageData = [
     "/hero/image1.jpg",
-    "/hero/image2.jpg",
     "/hero/image3.jpg",
-    "/hero/image4.jpg",
     "/hero/image5.jpg",
   ];
 

@@ -2,12 +2,12 @@ import { Button } from "@/components/ui/button";
 import {
   Drawer,
   DrawerContent,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { FiFilter } from "react-icons/fi";
+import CategoriesFilter from "./CategoriesFilter";
 
 export default function FilterButton() {
   return (
@@ -22,12 +22,7 @@ export default function FilterButton() {
         <DrawerHeader>
           <DrawerTitle className="text-xl font-bold">Filter</DrawerTitle>
         </DrawerHeader>
-
-        <DrawerFooter className="w-full">
-          <Button className="bg-primary-500 text-white text-xs w-full">
-            Terapkan
-          </Button>
-        </DrawerFooter>
+        <CategoriesFilter />
       </DrawerContent>
     </Drawer>
   );
