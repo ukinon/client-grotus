@@ -5,7 +5,10 @@ export type Product = {
   variant?: string;
   product_id?: number;
   description?: string;
-  photo?: string;
+  photo?: {
+    id: number;
+    image: string;
+  }[];
   rating?: {
     id: number;
     user_id: number;

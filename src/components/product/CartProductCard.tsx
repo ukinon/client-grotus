@@ -45,7 +45,7 @@ export default function CartProductCard({ data }: Props) {
         <Link href={`product/${data.product.id}`}>
           <Image
             src={
-              (data.product.photo as string) ||
+              (data.product?.photo?.[0].image as string) ||
               "https://via.placeholder.com/150"
             }
             width={150}

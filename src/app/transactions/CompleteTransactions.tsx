@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  useGetProductTransactions,
-  useGetTransactions,
-} from "@/hooks/transaction";
+import { useGetTransactions } from "@/hooks/transaction";
 import React from "react";
 import TransactionProductCard from "@/components/product/TransactionProductCard";
 import { Product } from "@/types/Product";

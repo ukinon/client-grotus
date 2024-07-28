@@ -44,8 +44,17 @@ export default function CategoriesSort() {
 
   const handleSortClick = (sortVal: string, directionVal: string) => {
     const currentParams = new URLSearchParams(params.toString());
-    currentParams.set("sortBy", sortVal);
-    currentParams.set("direction", directionVal);
+    if (
+      sortVal === currentParams.get("sortBy") &&
+      directionVal === currentParams.get("direction")
+    ) {
+      currentParams.delete("sortBy", sortVal);
+      currentParams.delete("direction", directionVal);
+    } else {
+      currentParams.set("sortBy", sortVal);
+      currentParams.set("direction", directionVal);
+    }
+
     router.replace(`?${currentParams.toString()}`);
   };
 

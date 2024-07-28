@@ -4,7 +4,10 @@ export type TransactionProduct = {
   amount: number;
   price: number;
   name: string;
-  photo: string;
+  photo: {
+    id: number;
+    image: string;
+  }[];
 };
 
 export type Transaction = {
