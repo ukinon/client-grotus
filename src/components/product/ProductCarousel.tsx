@@ -8,6 +8,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import Image from "next/image";
+import useEmblaCarousel from "embla-carousel-react";
 
 export function ProductCarousel({
   photos,
@@ -15,20 +16,29 @@ export function ProductCarousel({
   photos: { id: number; image: string }[];
 }) {
   const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [emblaRef, emblaApi] = useEmblaCarousel();
 
-  const handleSlideChange = (index: number) => {
-    setCurrentIndex(index);
+  const handleSlideChange = () => {
+    if (emblaApi) {
+      setCurrentIndex(emblaApi.selectedScrollSnap());
+    }
   };
 
+  React.useEffect(() => {
+    if (emblaApi) {
+      emblaApi.on("select", handleSlideChange);
+    }
+  }, [emblaApi]);
+
   const handlePreviewClick = (index: number) => {
-    setCurrentIndex(index);
-    // Assuming the Carousel component has a method to go to a specific slide
-    // You might need to implement this in your Carousel component
+    if (emblaApi) {
+      emblaApi.scrollTo(index);
+    }
   };
 
   return (
     <div className="relative w-full pb-14 md:pb-28">
-      <Carousel className="w-full">
+      <Carousel className="w-full" ref={emblaRef}>
         <CarouselContent>
           {photos?.map((photo, index) => (
             <CarouselItem key={index}>

@@ -16,6 +16,7 @@ type Props = {
   className?: string;
 };
 export default function MainProductCard({ data, className }: Props) {
+  console.log(data);
   return (
     <Card className={`${className} min-w-[150px] h-full`}>
       <Link
@@ -25,10 +26,7 @@ export default function MainProductCard({ data, className }: Props) {
       >
         <CardContent className="flex flex-col gap-2 items-start justify-center p-3 bg-white border border-zinc-300 shadow-sm rounded-xl w-full h-full">
           <Image
-            src={
-              (data?.photo?.[0]?.image as string) ||
-              "https://via.placeholder.com/150"
-            }
+            src={(data?.photo as string) || "https://via.placeholder.com/150"}
             width={150}
             height={150}
             alt="product image"

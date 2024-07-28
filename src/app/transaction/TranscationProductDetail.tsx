@@ -15,10 +15,7 @@ export default function TransactionProductDetail({ data }: Props) {
         className="flex flex-row gap-3 w-full"
       >
         <Image
-          src={
-            (data?.photo?.[0]?.image as string) ||
-            "https://via.placeholder.com/150"
-          }
+          src={(data?.photo as string) || "https://via.placeholder.com/150"}
           width={50}
           height={50}
           alt="product image"

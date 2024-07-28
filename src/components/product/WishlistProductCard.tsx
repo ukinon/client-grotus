@@ -34,8 +34,7 @@ export default function WishlistProductCard({ data }: Props) {
       <div className="flex flex-row gap-3 w-full">
         <Image
           src={
-            (data.product?.photo?.[0]?.image as string) ||
-            "https://via.placeholder.com/150"
+            (data.product?.photo as string) || "https://via.placeholder.com/150"
           }
           onClick={() => router.push(`/product/${data.product.id}`)}
           width={150}

@@ -4,12 +4,10 @@ import React, { useState, useRef, useEffect } from "react";
 import {
   BiCamera,
   BiPhotoAlbum,
-  BiRotateLeft,
   BiSend,
-  BiAdjust,
   BiArrowBack,
 } from "react-icons/bi";
-import { RxCaretLeft, RxRotateCounterClockwise } from "react-icons/rx";
+import { RxCaretLeft } from "react-icons/rx";
 import Navbar from "@/components/layout/Navbar";
 import Image from "next/image";
 import { useMutation } from "@tanstack/react-query";

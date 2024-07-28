@@ -54,8 +54,7 @@ export default function TransactionProductCard({
         >
           <Image
             src={
-              (data[0]?.photo?.[0]?.image as string) ||
-              "https://via.placeholder.com/150"
+              (data[0]?.photo as string) || "https://via.placeholder.com/150"
             }
             width={50}
             height={50}
@@ -88,7 +87,7 @@ export default function TransactionProductCard({
                     <div className="flex flex-row gap-3 w-full" key={index}>
                       <Image
                         src={
-                          (item?.photo?.[0]?.image as string) ||
+                          (item?.photo as string) ||
                           "https://via.placeholder.com/150"
                         }
                         width={50}
